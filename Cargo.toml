@@ -1,0 +1,6 @@
+[workspace]
+
+members = [
+    "salvo-web",
+    "actix-web"
+]
