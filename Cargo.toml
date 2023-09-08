@@ -4,3 +4,7 @@ members = [
     "salvo-web",
     "actix-web"
 ]
+
+exclude = [
+    "extend-plugin"
+]

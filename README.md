@@ -20,19 +20,22 @@
 | actix-web / salvo           | Api文档导出         | y   |
 | rust-tool                   | 创建目录时创建mod文件    | y   |
 | rust-tool                   | mod自动关联目录下新rs文件 | y   |
-| rbatis                      | html和方法导航       | n   |
+| rbatis                      | html和方法导航或创建    | y   |
 | rust-tool                   | SDK扩展           | n   |
 
 ## 功能演示
 
-![](images/doc.png)
-
 - 自动导入mod.rs你需要选中一个项目目录，在你mod.rs目录创建文件并修改时，会自动导入到mod.rs中。
 - 由于idea的需要延迟刷新文件内容。你可能需要切换下 软件窗口 或 关闭文件再次打开。即可看到效果。
+![](images/doc.png)
 
+- 文档默认导出到项目根目录下的Api.md文件中
 - ![](images/doc1.png)
+
+- rbatis : html和方法导航或创建
+- 注意: html标签是根据方法前缀来识别创建相应的标签，如select_xx -> select标签,默认也是select标签。
+- ![](images/doc2.png)
 
 ## 反馈
 
--
-请通过issue反馈bug或者建议 [https://github.com/licheng1013/rust-tool-example/issues](https://github.com/licheng1013/rust-tool-example/issues)
+- 请通过issue反馈bug或者建议 [https://github.com/licheng1013/rust-tool-example/issues](https://github.com/licheng1013/rust-tool-example/issues)
