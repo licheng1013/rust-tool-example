@@ -7,6 +7,7 @@
 - 1: 安装 Jetbrains 插件 https://plugins.jetbrains.com/plugin/22428-rusttool
 - 2: 导入t_gorm.sql到你的数据库并在 main.rs 文件修改为你的数据库链接
 - 3: 运行 main.rs 文件
+- 注意: 如果在插件商店内搜索不到插件，请更新你的开发工具(如IDEA)至最新版。
 
 ## 介绍
 
@@ -21,6 +22,7 @@
 | rust-tool                   | 创建目录时创建mod文件    | y   |
 | rust-tool                   | mod自动关联目录下新rs文件 | y   |
 | rbatis                      | html和方法导航或创建    | y   |
+| rbatis                      | 方法上出现预览sql按钮    | y   |
 | rust-tool                   | SDK扩展           | n   |
 
 ## 功能演示
