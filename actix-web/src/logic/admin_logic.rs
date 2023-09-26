@@ -1,11 +1,10 @@
-use std::future::IntoFuture;
 use std::sync::Arc;
 use actix_web::web::Data;
 use rbatis::{crud, impl_select_page, RBatis};
 use rbatis::rbdc::datetime::DateTime;
 use rbatis::sql::PageRequest;
+use common::util::page::{PageParam, PageResult};
 use crate::model::admin::Admin;
-use crate::util::page::{PageParam, PageResult};
 
 const TABLE_NAME: &str = "t_admin";
 

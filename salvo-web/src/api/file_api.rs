@@ -1,6 +1,6 @@
 use std::path::Path;
 use salvo::prelude::*;
-use crate::util::result::{fail, ok_msg};
+use common::util::result::{fail, ok_msg};
 
 #[handler]
 async fn upload(req: &mut Request, res: &mut Response) {

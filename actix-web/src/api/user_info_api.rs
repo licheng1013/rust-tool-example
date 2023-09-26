@@ -2,11 +2,11 @@ use std::sync::Arc;
 use actix_web::*;
 use actix_web::web::*;
 use rbatis::RBatis;
+use common::util::page::PageParam;
+use common::util::result::{ok_data, ok_msg};
 
 use crate::{get, logic, post};
 use crate::model::user_info::UserInfo;
-use crate::util::page::PageParam;
-use crate::util::result::{ok_data, ok_msg};
 
 pub fn user_info_api(cfg: &mut ServiceConfig) {
     cfg.service(

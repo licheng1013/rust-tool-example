@@ -1,10 +1,10 @@
-use std::future::IntoFuture;
 use rbatis::{crud, impl_select_page};
 use rbatis::rbdc::datetime::DateTime;
 use rbatis::sql::PageRequest;
+use common::util::page::{PageParam, PageResult};
 use crate::model::admin::Admin;
 use crate::RB;
-use crate::util::page::{PageParam, PageResult};
+
 
 const TABLE_NAME: &str = "t_admin";
 

@@ -1,8 +1,8 @@
 use salvo::prelude::*;
 use crate::logic;
 use crate::model::admin::Admin;
-use crate::util::page::PageParam;
-use crate::util::result::{ok_data, ok_msg};
+use common::util::page::PageParam;
+use common::util::result::{ok_data, ok_msg};
 
 #[handler]
 async fn list(_req: &mut Request, res: &mut Response) {

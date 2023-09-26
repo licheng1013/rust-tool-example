@@ -1,10 +1,9 @@
-use std::sync::{Arc, OnceLock};
+use std::sync::Arc;
 use actix_web::*;
 use rbatis::RBatis;
 use rbdc_mysql::driver::MysqlDriver;
 
 mod api;
-mod util;
 mod model;
 mod logic;
 

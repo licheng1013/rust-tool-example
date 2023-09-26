@@ -2,7 +2,8 @@
 
 members = [
     "salvo-web",
-    "actix-web"
+    "actix-web",
+    "common"
 ]
 
 exclude = [

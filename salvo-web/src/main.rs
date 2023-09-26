@@ -1,11 +1,10 @@
 
-use rbatis::{htmlsql_select_page, RBatis};
+use rbatis::RBatis;
 use rbdc_mysql::driver::MysqlDriver;
 use salvo::__private::once_cell::sync::Lazy;
 use salvo::prelude::*;
-use crate::util::result::ok_data;
+use ::common::util::result::ok_data;
 
-mod util;
 mod api;
 mod logic;
 mod model;
