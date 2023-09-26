@@ -3,21 +3,15 @@ use rbatis::RBatis;
 use rbdc_mysql::driver::MysqlDriver;
 use salvo::__private::once_cell::sync::Lazy;
 use salvo::prelude::*;
-use ::common::util::result::ok_data;
 
 mod api;
 mod logic;
 mod model;
-mod common;
+mod plugin;
 
 
 pub static RB: Lazy<RBatis> = Lazy::new(RBatis::new);
 
-#[handler]
-async fn hello(_req: &mut Request,  res: &mut Response) {
-    res.render(Json(ok_data("HelloWorld"))
-);
-}
 
 #[tokio::main]
 async fn main() {
@@ -27,7 +21,8 @@ async fn main() {
 
 
     let acceptor = TcpListener::new("127.0.0.1:5800").bind().await;
-    let router =  Router::new().get(hello)
+    let router =  Router::new()
+        .hoop(plugin::config::plugin)
         .push(api::file_api::router())
         .push(api::admin_api::router());
 

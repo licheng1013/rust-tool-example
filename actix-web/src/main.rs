@@ -6,6 +6,7 @@ use rbdc_mysql::driver::MysqlDriver;
 mod api;
 mod model;
 mod logic;
+mod plugin;
 
 
 #[actix_web::main]
