@@ -14,17 +14,18 @@
 - RustTool 是一个针对于 Rust web开发的一个idea插件，目前支持 actix-web 和 salvo 两个框架和 rbatis 增删改查代码生成.
 - y代表支持,n暂不支持.
 
-| 框架/插件                       | 功能                            | 支持) |
-|-----------------------------|-------------------------------|-----|
-| actix-web / salvo +  rbatis | 路由导航                          | y   |
-| actix-web / salvo +  rbatis | 增删改查代码生成                      | y   |
-| actix-web / salvo           | Api文档导出                       | y   |
-| actix-web / salvo           | 从方法直接打开url到浏览器(2023.9.10以上版本) | y   |
-| rust-tool                   | 创建目录时创建mod文件                  | y   |
-| rust-tool                   | mod自动关联目录下新rs文件               | y   |
-| rbatis                      | html和方法导航或创建                  | y   |
-| rbatis                      | 方法上出现预览sql按钮                  | y   |
-| rust-tool                   | SDK扩展                         | n   |
+| 框架/插件                       | 功能                         | 支持) |
+|-----------------------------|----------------------------|-----|
+| actix-web / salvo +  rbatis | 路由导航                       | y   |
+| actix-web / salvo +  rbatis | 增删改查代码生成                   | y   |
+| actix-web / salvo           | Api文档导出                    | y   |
+| actix-web / salvo           | 从方法直接打开url到浏览器(2023.9.10+) | y   |
+| rust-tool                   | 创建目录时创建mod文件               | y   |
+| rust-tool                   | mod自动关联目录下新rs文件            | y   |
+| rust-tool                   | api共享功能(2023.9.11+)        | y   |
+| rbatis                      | html和方法导航或创建               | y   |
+| rbatis                      | 方法上出现预览sql按钮               | y   |
+| rust-tool                   | SDK扩展                      | n   |
 
 ## 功能演示
 
@@ -46,6 +47,12 @@
 ### 从方法直接打开url到浏览器
 
 - ![](images/doc3.png)
+
+
+### Api共享功能
+- (2023.9.11+)版本
+- ![](images/doc4.png)
+- [https://licheng1013.github.io/toy-flutter/#/](https://licheng1013.github.io/toy-flutter/#/)
 
 ## 反馈
 
