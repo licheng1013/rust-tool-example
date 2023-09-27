@@ -10,6 +10,6 @@
    "modelPath" : "$PROJECT$/actix-web/src/model",
    "packagePath" : "$PROJECT$/actix-web/src",
    "prefix" : "t_",
-   "webBox" : 0,
-   "url" : "http://localhost:5800"
+   "url" : "http://localhost:5800",
+   "webBox" : 0
 }
