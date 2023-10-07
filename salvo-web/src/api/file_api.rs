@@ -22,6 +22,6 @@ async fn upload(req: &mut Request, res: &mut Response) {
 }
 
 pub fn router() -> Router {
-    Router::with_path("file")
-        .push(Router::with_path("upload").post(upload))
+    Router::with_path("/file")
+        .push(Router::with_path("/upload").post(upload))
 }

@@ -34,9 +34,9 @@ async fn insert(_req: &mut Request, res: &mut Response) {
 }
 
 pub fn router() -> Router {
-    Router::with_path("admin")
-        .push(Router::with_path("list").get(list))
-        .push(Router::with_path("update").post(update))
-        .push(Router::with_path("delete").post(delete))
-        .push(Router::with_path("insert").post(insert))
+    Router::with_path("/admin")
+        .push(Router::with_path("/list").get(list))
+        .push(Router::with_path("/update").post(update))
+        .push(Router::with_path("/delete").post(delete))
+        .push(Router::with_path("/insert").post(insert))
 }
