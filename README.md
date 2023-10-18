@@ -12,20 +12,20 @@
 ## 介绍
 
 - RustTool 是一个针对于 Rust web开发的一个idea插件，目前支持 actix-web 和 salvo 两个框架和 rbatis 增删改查代码生成.
-- y代表支持,n暂不支持.
+- 🆗代表支持,❌暂不支持.
 
 | 框架/插件                       | 功能                         | 支持) |
 |-----------------------------|----------------------------|-----|
-| actix-web / salvo +  rbatis | 路由导航                       | y   |
-| actix-web / salvo +  rbatis | 增删改查代码生成                   | y   |
-| actix-web / salvo           | Api文档导出                    | y   |
-| actix-web / salvo           | 从方法直接打开url到浏览器(2023.9.10+) | y   |
-| rust-tool                   | 创建目录时创建mod文件               | y   |
-| rust-tool                   | mod自动关联目录下新rs文件            | y   |
-| rust-tool                   | api共享功能(2023.9.11+)        | y   |
-| rbatis                      | html和方法导航或创建               | y   |
-| rbatis                      | 方法上出现预览sql按钮               | y   |
-| rust-tool                   | SDK扩展                      | n   |
+| actix-web / salvo +  rbatis | 路由导航                       | 🆗  |
+| actix-web / salvo +  rbatis | 增删改查代码生成                   | 🆗  |
+| actix-web / salvo           | Api文档导出                    | 🆗  |
+| actix-web / salvo           | 从方法直接打开url到浏览器(2023.9.10+) | 🆗  |
+| rust-tool                   | 创建目录时创建mod文件               | 🆗  |
+| rust-tool                   | mod自动关联目录下新rs文件            | 🆗  |
+| rust-tool                   | api共享功能(2023.9.11+)        | 🆗  |
+| rbatis                      | html和方法导航或创建               | 🆗  |
+| rbatis                      | 方法上出现预览sql按钮               | 🆗  |
+| rust-tool                   | SDK扩展                      | ❌   |
 
 ## 功能演示
 
