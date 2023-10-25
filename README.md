@@ -9,6 +9,18 @@
 - 3: 运行 main.rs 文件
 - 注意: 如果在插件商店内搜索不到插件，请更新你的开发工具(如IDEA)至最新版。
 
+## 新手教程
+- 1.可以先克隆此项目
+- 2.导入t_gorm.sql到你的数据库并在 
+- 3.找到 salvo-web / actix-web 项目下 main.rs 文件,修改数据库链接(启动项目则需要)
+- 4.通过插件连接到数据库,
+- ![](images/db2.png)
+- ![](images/db1.png)
+- 6.连接成功后,选中需要生成的表
+- 7.右键即可看到生成代码的选项(RustTool)
+
+
+
 ## 介绍
 
 - RustTool 是一个针对于 Rust web开发的一个idea插件，目前支持 actix-web 和 salvo 两个框架和 rbatis 增删改查代码生成.
