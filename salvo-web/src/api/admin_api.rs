@@ -4,6 +4,9 @@ use crate::model::admin::Admin;
 use common::util::page::PageParam;
 use common::util::result::{ok_data, ok_msg};
 
+///
+/// @Param(size=2,user_name=admin)
+///
 #[handler]
 async fn list(_req: &mut Request, res: &mut Response) {
     let model: Admin = _req.parse_queries().unwrap();

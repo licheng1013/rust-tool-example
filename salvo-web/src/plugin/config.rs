@@ -4,7 +4,7 @@ use salvo::prelude::*;
 pub async fn plugin(_req: &mut Request, _depot: &mut Depot,res: &mut Response,ctrl: &mut FlowCtrl) {
     let path = _req.uri().path();
     println!("plugin path: {}", path);
-    if path == "/admin/list" {
+    if path == "/admin/list/1" {
         res.render("Hello world");
         ctrl.cease(); // 跳过所有处理
     }

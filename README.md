@@ -35,11 +35,17 @@
 | rust-tool                   | 创建目录时创建mod文件               | 🆗  |
 | rust-tool                   | mod自动关联目录下新rs文件            | 🆗  |
 | rust-tool                   | api共享功能(2023.9.11+)        | 🆗  |
+| rust-tool                   | api请求测试功能(2023.9.18+)      | 🆗  |
 | rbatis                      | html和方法导航或创建               | 🆗  |
 | rbatis                      | 方法上出现预览sql按钮               | 🆗  |
 | rust-tool                   | SDK扩展                      | ❌   |
 
 ## 功能演示
+
+### Api测试功能
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/a8GGgqrZQJk?si=MRg9PM4gep_8AEFN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 
 ### 自动导入mod.rs
 

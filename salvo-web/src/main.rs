@@ -16,7 +16,7 @@ pub static RB: Lazy<RBatis> = Lazy::new(RBatis::new);
 #[tokio::main]
 async fn main() {
     // mysql connect info
-    let mysql_uri = "mysql://root:root@192.168.101.90/t_gorm";
+    let mysql_uri = "mysql://root:root@192.168.56.101/t_gorm";
     RB.init(MysqlDriver {}, mysql_uri).unwrap();
 
 
