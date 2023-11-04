@@ -44,10 +44,8 @@
 
 ### Api测试功能
 
-<div>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/a8GGgqrZQJk?si=MRg9PM4gep_8AEFN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</div>
-
+- (2023.9.18+)版本
+- ![](images/doc-api.gif)
 
 ### 自动导入mod.rs
 
