@@ -15,6 +15,8 @@ async fn list(_req: &mut Request, res: &mut Response) {
     res.render(Json(ok_data(&data)));
 }
 
+/// @Param(aa=aa)
+///
 #[handler]
 async fn update(_req: &mut Request, res: &mut Response) {
     let model: Admin = _req.parse_json().await.unwrap();
