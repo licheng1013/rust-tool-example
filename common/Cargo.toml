@@ -9,3 +9,9 @@ edition = "2021"
 # 序列化
 serde = { version = "1.0.180", features = ["derive"] } #序列化
 serde_json = "1"
+
+# jwt
+jsonwebtoken = "9"
+
+# 时间
+chrono = "0.4"

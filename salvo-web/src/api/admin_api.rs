@@ -38,10 +38,22 @@ async fn insert(_req: &mut Request, res: &mut Response) {
     res.render(Json(ok_msg("插入成功!".to_string())));
 }
 
+
+/// @Param(user_name=admin,password=123456)
+///
+#[handler]
+async fn login(_req: &mut Request, res: &mut Response) {
+    let model: Admin = _req.parse_json().await.unwrap();
+    logic::admin_logic::login(model).await;
+    res.render(Json(ok_msg("插入成功!".to_string())));
+}
+
+
 pub fn router() -> Router {
     Router::with_path("/admin")
         .push(Router::with_path("/list").get(list))
         .push(Router::with_path("/update").post(update))
         .push(Router::with_path("/delete").post(delete))
         .push(Router::with_path("/insert").post(insert))
+        .push(Router::with_path("/login").post(login))
 }

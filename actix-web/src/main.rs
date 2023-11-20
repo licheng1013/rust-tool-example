@@ -13,7 +13,7 @@ mod plugin;
 async fn main() -> std::io::Result<()> {
 
 
-    println!("http://localhost:8080");
+    println!("http://localhost:5800");
     let mysql_uri = "mysql://root:root@192.168.101.90/t_gorm";
 
     let rb = RBatis::new();
@@ -25,7 +25,7 @@ async fn main() -> std::io::Result<()> {
             .configure(api::admin_api::admin_api)
             .configure(api::user_info_api::user_info_api)
     })
-        .bind(("0.0.0.0", 8080))?
+        .bind(("0.0.0.0", 5800))?
         .run()
         .await
 }

@@ -1,6 +1,7 @@
 use rbatis::{crud, impl_select_page};
 use rbatis::rbdc::datetime::DateTime;
 use rbatis::sql::PageRequest;
+use serde_json::json;
 use common::util::page::{PageParam, PageResult};
 use crate::model::admin::Admin;
 use crate::RB;
@@ -70,3 +71,8 @@ pub fn where_condition(model: Admin) -> String {
 }
 
 
+pub async fn login(admin: Admin) {
+    println!("login = {}", json!(admin));
+   // let data = Admin::select_by_column(&mut RB.clone(), "user_name",admin.user_name).await;
+    //println!("select_by_id = {}", json!(data));
+}
