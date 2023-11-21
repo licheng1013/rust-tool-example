@@ -14,7 +14,7 @@ pub struct AppConfig {
 impl AppConfig {
     /// 读取配置文件
     pub fn new() -> AppConfig {
-        let yaml = std::fs::read_to_string("config.yaml").unwrap();
+        let yaml = std::fs::read_to_string("config.yml").unwrap();
         let app: AppConfig = serde_yaml::from_str(&yaml).unwrap();
         return app;
     }

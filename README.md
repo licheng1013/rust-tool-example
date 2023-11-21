@@ -2,28 +2,34 @@
 
 - [English](README_en.md)
 
-## 开始
+## 描述
 
-- 1: 安装 Jetbrains 插件 https://plugins.jetbrains.com/plugin/22428-rusttool
-- 2: 导入t_gorm.sql到你的数据库并在 main.rs 文件修改为你的数据库链接
-- 3: 运行 main.rs 文件
-- 注意: 如果在插件商店内搜索不到插件，请更新你的开发工具(如IDEA)至最新版。
+- 此项目是一个后台基本模板,使用 IDEA `RustTool` 插件来进行代码生成,
+- 目前支持 `actix-web` 和 `salvo` 两个框架和 rbatis 增删改查代码生成.
+- 你可以当作学习 `rust web` 项目的开发。 或者学习 `RustTool` 插件的使用。
+- 插件下载地址: [RustTool](https://plugins.jetbrains.com/plugin/22428-rusttool)
+- 注意: 如果在插件商店内搜索不到插件，`请更新你的开发工具(如IDEA)至最新版`。
 
-## 新手教程
-- 1.可以先克隆此项目
-- 2.导入t_gorm.sql到你的数据库并在 
-- 3.找到 [config.yaml](config.yaml) 文件修改为你的数据库链接
-- 4.通过插件连接到数据库,
-- ![](images/db2.png)
-- ![](images/db1.png)
-- 6.连接成功后,选中需要生成的表
-- 7.右键即可看到生成代码的选项(RustTool)
+## 入门
+
+- 1.克隆项目
+- 2.导入`t_gorm.sql` 到你的数据库
+- 3.修改 `config.yml` 文件中的数据库链接
+- 4.启动 `salvo-web/src/main.rs` 或 `actix-web/src/main.rs` 文件就可以运行项目了
 
 
+## RustTool插件教程
 
-## 介绍
+- 插件介绍
+- 项目中的 `rust-tool` 目录则是插件的所有配置
+- 如果不想共享在其他电脑上，可以通过 `.gitignore` 文件排除
+- 大致上来讲：`RustTool` 插件是一个代码生成工具。同时对于管理项目也起到了一定的帮助
+- 例如: API导航，API文档导出，自动导入mod.rs等功能，或者复制前端请求代码。
+- 这些功能虽然不是非必要的，但是能够提高开发效率。取决在于时间的取舍。
 
-- RustTool 是一个针对于 Rust web开发的一个idea插件，目前支持 actix-web 和 salvo 两个框架和 rbatis 增删改查代码生成.
+
+### 功能
+
 - 🆗代表支持,❌暂不支持.
 
 | 框架/插件                       | 功能                         | 支持) |
@@ -70,12 +76,13 @@
 
 - ![](images/doc3.png)
 
-
 ### Api共享功能
+
 - (2023.9.11+)版本
 - ![](images/doc4.png)
 - [https://licheng1013.github.io/toy-flutter/#/](https://licheng1013.github.io/toy-flutter/#/)
 
 ## 反馈
 
-- 请通过issue反馈bug或者建议 [https://github.com/licheng1013/rust-tool-example/issues](https://github.com/licheng1013/rust-tool-example/issues)
+-
+请通过issue反馈bug或者建议 [https://github.com/licheng1013/rust-tool-example/issues](https://github.com/licheng1013/rust-tool-example/issues)_
