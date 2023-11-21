@@ -12,7 +12,7 @@
 ## 新手教程
 - 1.可以先克隆此项目
 - 2.导入t_gorm.sql到你的数据库并在 
-- 3.找到 salvo-web / actix-web 项目下 main.rs 文件,修改数据库链接(启动项目则需要)
+- 3.找到 [config.yaml](config.yaml) 文件修改为你的数据库链接
 - 4.通过插件连接到数据库,
 - ![](images/db2.png)
 - ![](images/db1.png)

@@ -1,8 +1,9 @@
-
+use std::ops::Deref;
 use rbatis::RBatis;
 use rbdc_mysql::driver::MysqlDriver;
 use salvo::__private::once_cell::sync::Lazy;
 use salvo::prelude::*;
+use common::config::config::AppConfig;
 
 mod api;
 mod logic;
@@ -11,21 +12,20 @@ mod plugin;
 
 
 pub static RB: Lazy<RBatis> = Lazy::new(RBatis::new);
+pub static APP_CONFIG: Lazy<AppConfig> = Lazy::new(AppConfig::new);
 
 
 #[tokio::main]
 async fn main() {
+    println!("{:?}", APP_CONFIG.deref());
+    let host = "127.0.0.1:".to_string() + APP_CONFIG.port.to_string().as_str();
     // mysql connect info
-    let mysql_uri = "mysql://root:root@192.168.56.101/t_gorm";
-    RB.init(MysqlDriver {}, mysql_uri).unwrap();
-
-
-    let acceptor = TcpListener::new("127.0.0.1:5800").bind().await;
-    let router =  Router::new()
-        .hoop(plugin::config::plugin)
+    RB.init(MysqlDriver {}, APP_CONFIG.mysql_url.as_str()).unwrap();
+    let acceptor = TcpListener::new(host.clone()).bind().await;
+    let router = Router::new()
+        .hoop(plugin::auth::plugin)
         .push(api::file_api::router())
         .push(api::admin_api::router());
-
-    println!("http://127.0.0.1:5800");
+    println!("http://{}", host);
     Server::new(acceptor).serve(router).await;
 }

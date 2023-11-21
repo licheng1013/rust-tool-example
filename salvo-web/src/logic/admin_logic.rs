@@ -76,3 +76,8 @@ pub async fn login(admin: Admin) {
    // let data = Admin::select_by_column(&mut RB.clone(), "user_name",admin.user_name).await;
     //println!("select_by_id = {}", json!(data));
 }
+
+pub(crate) async fn get(userId: i64) {
+    let data = Admin::select_by_column(&mut RB.clone(), "id",userId).await.unwrap();
+    println!("select_by_id = {}", json!(data));
+}

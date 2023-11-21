@@ -2,6 +2,7 @@ use std::sync::Arc;
 use actix_web::*;
 use rbatis::RBatis;
 use rbdc_mysql::driver::MysqlDriver;
+use common::config::config::AppConfig;
 
 mod api;
 mod model;
@@ -13,11 +14,13 @@ mod plugin;
 async fn main() -> std::io::Result<()> {
 
 
-    println!("http://localhost:5800");
-    let mysql_uri = "mysql://root:root@192.168.101.90/t_gorm";
+    let config = AppConfig::new();
+    println!("{:?}", config);
+    let host = "127.0.0.1:".to_string() + config.port.to_string().as_str();
+    println!("http://{}", host);
 
     let rb = RBatis::new();
-    rb.init(MysqlDriver {}, mysql_uri).unwrap();
+    rb.init(MysqlDriver {}, config.mysql_url.as_str()).unwrap();
     let rb = Arc::new(rb);
     HttpServer::new(move || {
         App::new()
@@ -25,7 +28,7 @@ async fn main() -> std::io::Result<()> {
             .configure(api::admin_api::admin_api)
             .configure(api::user_info_api::user_info_api)
     })
-        .bind(("0.0.0.0", 5800))?
+        .bind(("0.0.0.0", config.port))?
         .run()
         .await
 }

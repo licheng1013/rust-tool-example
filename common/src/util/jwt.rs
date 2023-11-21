@@ -1,3 +1,4 @@
+use std::string::ToString;
 use chrono::{Duration, Utc};
 use serde::{Deserialize, Serialize};
 use jsonwebtoken::{decode, DecodingKey, Validation, Algorithm, encode, Header, EncodingKey};
@@ -13,6 +14,7 @@ struct Claims {
 
 pub struct JwtUtil {}
 static KEY: &'static [u8] = b"secret";
+pub static TOKEN: &'static str = "TOKEN";
 
 impl JwtUtil {
     /// 生成token
@@ -49,7 +51,7 @@ mod tests {
 
     #[test]
     fn jwt() {
-        let token = JwtUtil::token(12);
+        let token = JwtUtil::token(12313);
         println!("{:?}", token);
         // Decode
         let token_data = JwtUtil::id(&token);
