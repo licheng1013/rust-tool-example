@@ -72,7 +72,7 @@ pub fn where_condition(model: Admin) -> String {
 
 
 pub async fn login(admin: Admin) {
-    println!("login = {}", json!(admin));
+    println!("login = {:?}", admin);
    // let data = Admin::select_by_column(&mut RB.clone(), "user_name",admin.user_name).await;
     //println!("select_by_id = {}", json!(data));
 }
