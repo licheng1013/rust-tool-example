@@ -2,6 +2,8 @@ use std::ops::Deref;
 use rbatis::RBatis;
 use rbdc_mysql::driver::MysqlDriver;
 use salvo::__private::once_cell::sync::Lazy;
+use salvo::cors::Cors;
+use salvo::http::Method;
 use salvo::prelude::*;
 use common::config::config::AppConfig;
 
@@ -21,11 +23,20 @@ async fn main() {
     let host = "127.0.0.1:".to_string() + APP_CONFIG.port.to_string().as_str();
     // mysql connect info
     RB.init(MysqlDriver {}, APP_CONFIG.mysql_url.as_str()).unwrap();
+
+    // 跨域
+    let cors_handler = Cors::new()
+        .allow_origin(vec!["http://127.0.0.1:8080"])
+        .allow_methods(vec![Method::GET, Method::POST])
+        .into_handler();
+
+
     let acceptor = TcpListener::new(host.clone()).bind().await;
-    let router = Router::new()
+    let router = Router::new().hoop(cors_handler)
         .hoop(plugin::auth::plugin)
         .push(api::file_api::router())
         .push(api::admin_api::router());
+
     println!("http://{}", host);
     Server::new(acceptor).serve(router).await;
 }

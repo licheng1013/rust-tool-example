@@ -1939,7 +1939,19 @@ version = "0.58.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "510e7dbb3e5bf53bd7144a17a71d2be3db5f4bfdf698fa3dc76e0e0f0a9810a5"
 dependencies = [
+ "salvo-cors",
  "salvo_core",
+]
+
+[[package]]
+name = "salvo-cors"
+version = "0.58.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4ca5cb573d5d7dd63bfccdcb80f4f390b1cbae470b9ba33d8641c121aa826f78"
+dependencies = [
+ "bytes",
+ "salvo_core",
+ "tracing",
 ]
 
 [[package]]
