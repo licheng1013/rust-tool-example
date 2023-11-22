@@ -12,10 +12,18 @@
 
 ## 入门
 
+### 后端
+
 - 1.克隆项目
 - 2.导入`t_gorm.sql` 到你的数据库
 - 3.修改 `config.yml` 文件中的数据库链接
 - 4.启动 `salvo-web/src/main.rs` 或 `actix-web/src/main.rs` 文件就可以运行项目了
+
+### 前端
+
+- 1.view目录下的运行 `pnpm i`
+- 2.运行 `pnpm run dev` 即可运行前端项目
+- 3.打包 `pnpm run build` 即可打包前端项目
 
 
 ## RustTool插件教程

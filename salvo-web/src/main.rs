@@ -26,13 +26,16 @@ async fn main() {
 
     // 跨域
     let cors_handler = Cors::new()
-        .allow_origin(vec!["http://127.0.0.1:8080"])
-        .allow_methods(vec![Method::GET, Method::POST])
+        .allow_origin(vec!["http://127.0.0.1"])
+        .allow_headers("*")
+        .allow_methods(vec![Method::GET, Method::POST,
+                            Method::PUT, Method::DELETE, Method::OPTIONS])
         .into_handler();
 
 
     let acceptor = TcpListener::new(host.clone()).bind().await;
-    let router = Router::new().hoop(cors_handler)
+    let router = Router::new()
+        .hoop(cors_handler)
         .hoop(plugin::auth::plugin)
         .push(api::file_api::router())
         .push(api::admin_api::router());
