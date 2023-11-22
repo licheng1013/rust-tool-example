@@ -1,7 +1,7 @@
 use rbatis::rbdc::datetime::DateTime;
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Deserializer, Serialize};
 
-#[derive(Clone, Debug, Serialize, Deserialize,PartialEq)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct Admin {
     /// 管理员id

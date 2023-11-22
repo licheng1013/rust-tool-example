@@ -14,7 +14,7 @@ const TABLE_NAME: &str = "t_admin";
 
 crud!(Admin{},TABLE_NAME);
 impl_select_page!(Admin{page(where_str:&str) => "${where_str}"},TABLE_NAME);
-impl_select!(Admin{select_by_user_name(table_name:&str,val:&str) -> Option => "`where user_name = #{val} limit 1`"});
+impl_select!(Admin{select_by_user_name(val:&str) -> Option => "`where user_name = #{val} limit 1`"},TABLE_NAME);
 
 
 pub async fn list(page: PageParam, model: Admin) -> PageResult<Vec<Admin>> {
@@ -81,8 +81,7 @@ pub async fn login(admin: Admin) -> Map<String, Value> {
     let err_msg = "账号或密码错误";
     As::in_range_str(admin.user_name.clone(), 3, 12, err_msg);
     As::in_range_str(admin.password.clone(), 3, 12, err_msg);
-    let data = Admin::select_by_user_name(&mut RB.clone(),
-                                          TABLE_NAME,&admin.user_name.unwrap()).await.unwrap();
+    let data = Admin::select_by_user_name(&mut RB.clone(), &admin.user_name.unwrap()).await.unwrap();
     if data == None {
         As::error(err_msg);
     }
