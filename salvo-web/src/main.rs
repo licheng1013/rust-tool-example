@@ -26,10 +26,12 @@ async fn main() {
 
     // 跨域
     let cors_handler = Cors::new()
-        .allow_origin(vec!["http://127.0.0.1"])
+        .allow_credentials(false)
+        .allow_origin("*")
         .allow_headers("*")
         .allow_methods(vec![Method::GET, Method::POST,
                             Method::PUT, Method::DELETE, Method::OPTIONS])
+        .max_age(3600)
         .into_handler();
 
 
