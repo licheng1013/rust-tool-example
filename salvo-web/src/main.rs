@@ -3,12 +3,13 @@ use rbatis::RBatis;
 use rbdc_mysql::driver::MysqlDriver;
 use salvo::__private::once_cell::sync::Lazy;
 use salvo::cors::Cors;
+use salvo::catcher::Catcher;
 use salvo::http::Method;
 use salvo::prelude::*;
 use common::config::config::AppConfig;
 
 mod api;
-mod logic;
+pub(crate) mod logic;
 mod model;
 mod plugin;
 
@@ -37,11 +38,13 @@ async fn main() {
 
     let acceptor = TcpListener::new(host.clone()).bind().await;
     let router = Router::new()
-        .hoop(cors_handler)
+        .hoop(cors_handler.clone())
         .hoop(plugin::auth::plugin)
         .push(api::file_api::router())
-        .push(api::admin_api::router());
+        .push(api::admin_api::router())
+        .options(handler::empty());
 
     println!("http://{}", host);
-    Server::new(acceptor).serve(router).await;
+    let service = Service::new(router).catcher(Catcher::default().hoop(cors_handler));
+    Server::new(acceptor).serve(service).await;
 }

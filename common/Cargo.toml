@@ -16,3 +16,6 @@ jsonwebtoken = "9"
 
 # 时间
 chrono = "0.4"
+
+# 加密处理
+md5 = "0.7.0"

@@ -1,4 +1,3 @@
-use std::string::ToString;
 use chrono::{Duration, Utc};
 use serde::{Deserialize, Serialize};
 use jsonwebtoken::{decode, DecodingKey, Validation, Algorithm, encode, Header, EncodingKey};
@@ -14,7 +13,7 @@ struct Claims {
 
 pub struct JwtUtil {}
 static KEY: &'static [u8] = b"secret";
-pub static TOKEN: &'static str = "TOKEN";
+pub static TOKEN: &'static str = "Authorization";
 
 impl JwtUtil {
     /// 生成token

@@ -44,9 +44,17 @@ async fn insert(_req: &mut Request, res: &mut Response) {
 #[handler]
 async fn login(_req: &mut Request, res: &mut Response) {
     let model: Admin = _req.parse_json().await.unwrap();
-    logic::admin_logic::login(model).await;
-    res.render(Json(ok_msg("插入成功!".to_string())));
+    let map = logic::admin_logic::login(model).await;
+    res.render(Json(ok_data(&map)));
 }
+
+
+#[handler]
+async fn userInfo(_req: &mut Request, res: &mut Response) {
+    let map = logic::admin_logic::user_info().await;
+    res.render(Json(ok_data(&map)));
+}
+
 
 
 pub fn router() -> Router {
@@ -55,5 +63,6 @@ pub fn router() -> Router {
         .push(Router::with_path("/update").post(update))
         .push(Router::with_path("/delete").post(delete))
         .push(Router::with_path("/insert").post(insert))
-        .push(Router::with_path("/login").post(login))
+        .push(Router::with_path("/userInfo").get(userInfo)) // 获取用户信息
+        .push(Router::with_path("/login").post(login)) // 登录
 }
