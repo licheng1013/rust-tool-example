@@ -5,8 +5,8 @@ use rbatis::RBatis;
 
 use crate::{get, logic, post};
 use crate::model::${tableName}::${className};
-use crate::util::page::PageParam;
-use crate::util::result::{ok_data, ok_msg};
+use common::util::page::PageParam;
+use common::util::result::{ok_data, ok_msg};
 
 pub fn ${tableName}_api(cfg: &mut ServiceConfig) {
     cfg.service(

@@ -5,7 +5,7 @@ use rbatis::{crud, impl_select_page, RBatis};
 use rbatis::rbdc::datetime::DateTime;
 use rbatis::sql::PageRequest;
 use crate::model::${tableName}::${className};
-use crate::util::page::{PageParam, PageResult};
+use common::util::page::{PageParam, PageResult};
 
 const TABLE_NAME: &str = "${table}";
 

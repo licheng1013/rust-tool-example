@@ -1,15 +1,15 @@
 {
   "apiBox": true,
-  "apiPath": "$PROJECT$/salvo-web/src/api",
+  "apiPath": "$PROJECT$/actix-web/src/api",
   "apiSuffix": "_api.rs",
   "autoModPath": "$PROJECT$/actix-web",
   "logicBox": true,
-  "logicPath": "$PROJECT$/salvo-web/src/logic",
+  "logicPath": "$PROJECT$/actix-web/src/logic",
   "logicSuffix": "_logic.rs",
   "modelBox": true,
-  "modelPath": "$PROJECT$/salvo-web/src/model",
-  "packagePath": "$PROJECT$/salvo-web/src",
+  "modelPath": "$PROJECT$/actix-web/src/model",
+  "packagePath": "$PROJECT$/actix-web/src",
   "prefix": "t_",
   "url": "http://localhost:5800",
-  "webBox": 1
+  "webBox": 0
 }
