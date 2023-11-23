@@ -2,7 +2,6 @@ use rbatis::rbdc::datetime::DateTime;
 use serde::{Deserialize, Deserializer, Serialize};
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
-#[serde(rename_all = "camelCase")]
 pub struct Admin {
     /// 管理员id
     pub id: Option<i64>,

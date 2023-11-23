@@ -1,0 +1,14 @@
+/// DTO 对象
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct ${dtoClassName}{
+    ${dtoField}
+}
+
+impl From<${className}> for ${dtoClassName}{
+    fn from(dto: ${className}) -> Self {
+        ${dtoClassName}{
+            ${fromField}
+        }
+    }
+}

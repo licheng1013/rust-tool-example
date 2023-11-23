@@ -1,5 +1,4 @@
 use std::ops::Deref;
-use rbatis::camel_case::RBATIS_CONFIG;
 use rbatis::RBatis;
 use rbdc_mysql::driver::MysqlDriver;
 use salvo::__private::once_cell::sync::Lazy;

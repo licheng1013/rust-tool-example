@@ -3,7 +3,6 @@ use serde::{Deserialize, Serialize};
 
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
-#[serde(rename_all = "camelCase")]
 pub struct UserInfo {
     /// 主键
     pub id: Option<i64>,
