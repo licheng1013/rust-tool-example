@@ -50,7 +50,7 @@ async fn login(_req: &mut Request, res: &mut Response) {
 
 
 #[handler]
-async fn userInfo(_req: &mut Request, res: &mut Response) {
+async fn user_info(_req: &mut Request, res: &mut Response) {
     let map = logic::admin_logic::user_info().await;
     res.render(Json(ok_data(&map)));
 }
@@ -63,6 +63,6 @@ pub fn router() -> Router {
         .push(Router::with_path("/update").post(update))
         .push(Router::with_path("/delete").post(delete))
         .push(Router::with_path("/insert").post(insert))
-        .push(Router::with_path("/userInfo").get(userInfo)) // 获取用户信息
+        .push(Router::with_path("/userInfo").get(user_info)) // 获取用户信息
         .push(Router::with_path("/login").post(login)) // 登录
 }

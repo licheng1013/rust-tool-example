@@ -1796,9 +1796,9 @@ dependencies = [
 
 [[package]]
 name = "rbs"
-version = "4.5.0"
+version = "4.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "420c44405e00652635e5d3b00ed7fd73b91a1a7f62a7670505b5014425a0f5e5"
+checksum = "8c2e961d60d27aac8a5fecfe8908b691ca605b3a63a549544a69502c8449f19d"
 dependencies = [
  "serde",
 ]

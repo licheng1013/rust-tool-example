@@ -19,6 +19,6 @@ pub async fn plugin(_req: &mut Request, _depot: &mut Depot, res: &mut Response, 
     let token = token.unwrap();
     let id = jwt::JwtUtil::id(token);
     // 查询用户信息
-    let user = logic::admin_logic::get(id).await;
-    //println!("{:?}", user);
+    let _user = logic::admin_logic::get(id).await;
+
 }

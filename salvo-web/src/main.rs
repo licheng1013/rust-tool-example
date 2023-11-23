@@ -1,4 +1,5 @@
 use std::ops::Deref;
+use rbatis::camel_case::RBATIS_CONFIG;
 use rbatis::RBatis;
 use rbdc_mysql::driver::MysqlDriver;
 use salvo::__private::once_cell::sync::Lazy;
@@ -42,6 +43,7 @@ async fn main() {
         .hoop(plugin::auth::plugin)
         .push(api::file_api::router())
         .push(api::admin_api::router())
+        .push(api::user_info_api::router())
         .options(handler::empty());
 
     println!("http://{}", host);
