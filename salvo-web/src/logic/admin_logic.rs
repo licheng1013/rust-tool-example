@@ -44,13 +44,16 @@ pub async fn update(model: Admin) {
 }
 
 pub async fn delete(ids: Vec<i64>) {
-    if ids.len() > 1 {
+    if ids.len() > 1 || ids[0] == 0 {
+        println!("{:?}", "不允许批量删除-或数值为0");
         return;
     }
-
-    // let result = Admin::delete_by_column(&mut RB.clone(), "id"
-    //                                      , model.id.unwrap_or(0)).await.unwrap();
-    println!("{:?}",ids)
+    let id = ids[0];
+    if id == 3 || id  == 12313 || id == 12314 {
+        println!("{:?}", "默认账号不允许删除");
+        return;
+    }
+    Admin::delete_by_column(&mut RB.clone(), "id", id).await.unwrap();
 }
 
 pub async fn insert(mut model: Admin) {
