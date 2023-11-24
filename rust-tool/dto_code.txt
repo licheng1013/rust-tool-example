@@ -1,4 +1,4 @@
-/// DTO 对象
+/// DTO 对象 - 由插件生成。不应该直接更改。
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct ${dtoClassName}{
@@ -8,6 +8,14 @@ pub struct ${dtoClassName}{
 impl From<${className}> for ${dtoClassName}{
     fn from(dto: ${className}) -> Self {
         ${dtoClassName}{
+            ${fromField}
+        }
+    }
+}
+
+impl From<${dtoClassName}> for ${className}{
+    fn from(dto: ${dtoClassName}) -> Self {
+        ${className}{
             ${fromField}
         }
     }

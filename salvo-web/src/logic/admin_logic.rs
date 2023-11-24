@@ -16,6 +16,7 @@ crud!(Admin{},TABLE_NAME);
 impl_select_page!(Admin{page(where_str:&str) => "${where_str}"},TABLE_NAME);
 impl_select!(Admin{select_by_user_name(val:&str) -> Option => "`where user_name = #{val} limit 1`"},TABLE_NAME);
 
+//@Rbatis(Admin)
 
 pub async fn list(page: PageParam, model: Admin) -> PageResult<Vec<Admin>> {
     let condition = where_condition(model);
