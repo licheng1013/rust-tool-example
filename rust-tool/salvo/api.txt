@@ -1,36 +1,36 @@
 use rbatis::sql::PageRequest;
 use salvo::prelude::*;
 use crate::logic;
-use crate::model::${tableName}::${className};
+use crate::model::${tableName}::{${className}, ${className}Dto};
 use common::util::page::PageParam;
 use common::util::result::{ok_data, ok_msg};
 
 #[handler]
 async fn list(_req: &mut Request, res: &mut Response) {
-    let model: ${className} = _req.parse_queries().unwrap();
+    let model: ${className}Dto = _req.parse_queries().unwrap();
     let page: PageParam = _req.parse_queries().unwrap();
-    let data = logic::${tableName}_logic::list(page, model).await;
+    let data = logic::${tableName}_logic::list(page, ${className}::from(model)).await;
     res.render(Json(ok_data(&data)));
 }
 
 #[handler]
 async fn update(_req: &mut Request, res: &mut Response) {
-    let model: ${className} = _req.parse_json().await.unwrap();
-    logic::${tableName}_logic::update(model).await;
+    let model: ${className}Dto = _req.parse_json().await.unwrap();
+    logic::${tableName}_logic::update(${className}::from(model)).await;
     res.render(Json(ok_data("修改成功!")));
 }
 
 #[handler]
 async fn delete(_req: &mut Request, res: &mut Response) {
-    let model: ${className} = _req.parse_json().await.unwrap();
+    let model: Vec<i64> = _req.parse_json().await.unwrap();
     logic::${tableName}_logic::delete(model).await;
     res.render(Json(ok_data("删除成功!")));
 }
 
 #[handler]
 async fn insert(_req: &mut Request, res: &mut Response) {
-    let model: ${className} = _req.parse_json().await.unwrap();
-    logic::${tableName}_logic::insert(model).await;
+    let model: ${className}Dto = _req.parse_json().await.unwrap();
+    logic::${tableName}_logic::insert(${className}::from(model)).await;
     res.render(Json(ok_data("插入成功!")));
 }
 

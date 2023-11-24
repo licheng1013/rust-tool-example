@@ -2,7 +2,7 @@ use std::future::IntoFuture;
 use rbatis::{crud, impl_select_page};
 use rbatis::rbdc::datetime::DateTime;
 use rbatis::sql::PageRequest;
-use crate::model::user_info::UserInfo;
+use crate::model::user_info::{UserInfo, UserInfoDto};
 use crate::RB;
 use common::util::page::{PageParam, PageResult};
 
@@ -11,16 +11,22 @@ const TABLE_NAME: &str = "t_user_info";
 crud!(UserInfo{},TABLE_NAME);
 impl_select_page!(UserInfo{page(where_str:&str) => "${where_str}"},TABLE_NAME);
 
-pub async fn list(page: PageParam, model: UserInfo) -> PageResult<Vec<UserInfo>> {
+pub async fn list(page: PageParam, model: UserInfo) -> PageResult<Vec<UserInfoDto>> {
     let condition = where_condition(model);
     println!("{condition:?}");
     let result = UserInfo::page(
         &mut RB.clone(),
         &PageRequest::new(page.page.unwrap_or(1)
                           , page.size.unwrap_or(10)), &condition).await.unwrap();
+
+    // 记录转换为dto
+    let mut list = vec![];
+    for item in result.records {
+        list.push(UserInfoDto::from(item));
+    }
     return PageResult {
         total: result.total,
-        list: result.records,
+        list,
     };
 }
 
@@ -30,9 +36,13 @@ pub async fn update(model: UserInfo) {
     println!("{result:?}")
 }
 
-pub async fn delete(model: UserInfo) {
+pub async fn delete(ids: Vec<i64>) {
+   if ids.len() > 1 || ids[0] == 0 {
+        println!("{:?}", "不允许批量删除-或数值为0");
+        return;
+    }
     let result = UserInfo::delete_by_column(&mut RB.clone(), "id"
-                                         , model.id.unwrap_or(0)).await.unwrap();
+                                         , ids[0]).await.unwrap();
     println!("{result:?}")
 }
 

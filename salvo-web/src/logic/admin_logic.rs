@@ -110,9 +110,9 @@ pub async fn login(admin: Admin) -> Map<String, Value> {
     return map;
 }
 
-pub(crate) async fn get(userId: i64) {
-    let data = Admin::select_by_column(&mut RB.clone(), "id", userId).await.unwrap();
-    println!("select_by_id = {}", json!(data));
+pub(crate) async fn get(user_id: i64) {
+    let data = Admin::select_by_column(&mut RB.clone(), "id", user_id).await.unwrap();
+    println!("中间件查询 = {}", json!(data));
 }
 
 pub(crate) async fn user_info() -> Map<String, Value> {
