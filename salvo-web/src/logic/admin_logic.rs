@@ -6,7 +6,7 @@ use common::util::assert::As;
 use common::util::jwt::JwtUtil;
 use common::util::page::{PageParam, PageResult};
 use common::util::password::PasswdUtil;
-use crate::model::admin::Admin;
+use crate::model::admin::{Admin, AdminDto};
 use crate::RB;
 
 
@@ -18,16 +18,22 @@ impl_select!(Admin{select_by_user_name(val:&str) -> Option => "`where user_name 
 
 //@Rbatis(Admin)
 
-pub async fn list(page: PageParam, model: Admin) -> PageResult<Vec<Admin>> {
+pub async fn list(page: PageParam, model: Admin) -> PageResult<Vec<AdminDto>> {
     let condition = where_condition(model);
     println!("{condition:?}");
     let result = Admin::page(
         &mut RB.clone(),
         &PageRequest::new(page.page.unwrap_or(1)
                           , page.size.unwrap_or(10)), &condition).await.unwrap();
+
+    // 记录转换为dto
+    let mut list = vec![];
+    for item in result.records {
+        list.push(AdminDto::from(item));
+    }
     return PageResult {
         total: result.total,
-        list: result.records,
+        list,
     };
 }
 
@@ -37,10 +43,14 @@ pub async fn update(model: Admin) {
     println!("{result:?}")
 }
 
-pub async fn delete(model: Admin) {
-    let result = Admin::delete_by_column(&mut RB.clone(), "id"
-                                         , model.id.unwrap_or(0)).await.unwrap();
-    println!("{result:?}")
+pub async fn delete(ids: Vec<i64>) {
+    if ids.len() > 1 {
+        return;
+    }
+
+    // let result = Admin::delete_by_column(&mut RB.clone(), "id"
+    //                                      , model.id.unwrap_or(0)).await.unwrap();
+    println!("{:?}",ids)
 }
 
 pub async fn insert(mut model: Admin) {

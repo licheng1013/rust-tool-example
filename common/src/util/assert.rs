@@ -28,6 +28,13 @@ impl As {
     pub fn error(err_msg: &str) {
             panic!("{}", err_msg);
     }
+
+    /// 判断是否为真
+    pub fn is_true(b: bool, err_msg: &str) {
+        if b {
+            panic!("{}", err_msg);
+        }
+    }
 }
 
 // 编写测试
