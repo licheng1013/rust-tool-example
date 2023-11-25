@@ -2,6 +2,7 @@ use rbatis::{crud, impl_select, impl_select_page};
 use rbatis::rbdc::datetime::DateTime;
 use rbatis::sql::PageRequest;
 use serde_json::{json, Map, Value};
+use common::util;
 use common::util::assert::As;
 use common::util::jwt::JwtUtil;
 use common::util::page::{PageParam, PageResult};
@@ -15,12 +16,13 @@ const TABLE_NAME: &str = "t_admin";
 crud!(Admin{},TABLE_NAME);
 impl_select_page!(Admin{page(where_str:&str) => "${where_str}"},TABLE_NAME);
 impl_select!(Admin{select_by_user_name(val:&str) -> Option => "`where user_name = #{val} limit 1`"},TABLE_NAME);
+impl_select!(Admin{select_by_id(val:i64) -> Option => "`where id = #{val} limit 1`"},TABLE_NAME);
 
 //@Rbatis(Admin)
 
 pub async fn list(page: PageParam, model: Admin) -> PageResult<Vec<AdminDto>> {
     let condition = where_condition(model);
-    println!("{condition:?}");
+    println!("{:?},{:?}", condition,get_user_id());
     let result = Admin::page(
         &mut RB.clone(),
         &PageRequest::new(page.page.unwrap_or(1)
@@ -110,10 +112,16 @@ pub async fn login(admin: Admin) -> Map<String, Value> {
     return map;
 }
 
-pub(crate) async fn get(user_id: i64) {
-    let data = Admin::select_by_column(&mut RB.clone(), "id", user_id).await.unwrap();
-    println!("中间件查询 = {}", json!(data));
+pub(crate) async fn get(user_id: i64) -> Option<Admin> {
+    let data = Admin::select_by_id(&mut RB.clone(),  user_id).await.unwrap();
+    return data
 }
+
+// 获取用户id
+pub(crate) fn get_user_id() -> i64 {
+    return util::thread::get_user_id()
+}
+
 
 pub(crate) async fn user_info() -> Map<String, Value> {
     // 角色map
