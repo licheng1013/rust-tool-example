@@ -9,8 +9,11 @@
 - 你可以当作学习 `rust web` 项目的开发。 或者学习 `RustTool` 插件的使用。
 - 插件下载地址: [RustTool](https://plugins.jetbrains.com/plugin/22428-rusttool)
 - 注意: 如果在插件商店内搜索不到插件，`请更新你的开发工具(如IDEA)至最新版`。
+- 交流群: `289132257`
 
 ## 入门
+
+- 插件有较多配置,建议从示例项目开始学习。
 
 ### 后端
 
@@ -94,5 +97,4 @@
 
 ## 反馈
 
--
-请通过issue反馈bug或者建议 [https://github.com/licheng1013/rust-tool-example/issues](https://github.com/licheng1013/rust-tool-example/issues)_
+- 请通过issue反馈bug或者建议 [https://github.com/licheng1013/rust-tool-example/issues](https://github.com/licheng1013/rust-tool-example/issues)_
