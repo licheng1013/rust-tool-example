@@ -13,11 +13,10 @@ pub struct UserInfo {
     pub create_time: Option<DateTime>,
 }
 
-
 /// DTO 对象 - 由插件生成。不应该直接更改。
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 #[serde(rename_all = "camelCase")]
-pub struct UserInfoDto{
+pub struct UserInfoDto {
     /// 主键
     pub id: Option<i64>,
     /// 名称
@@ -28,24 +27,24 @@ pub struct UserInfoDto{
     pub create_time: Option<DateTime>,
 }
 
-impl From<UserInfo> for UserInfoDto{
+impl From<UserInfo> for UserInfoDto {
     fn from(dto: UserInfo) -> Self {
-        UserInfoDto{
-            id:dto.id,
-            name:dto.name,
-            nickname:dto.nickname,
-            create_time:dto.create_time,
+        UserInfoDto {
+            id: dto.id,
+            name: dto.name,
+            nickname: dto.nickname,
+            create_time: dto.create_time,
         }
     }
 }
 
-impl From<UserInfoDto> for UserInfo{
+impl From<UserInfoDto> for UserInfo {
     fn from(dto: UserInfoDto) -> Self {
-        UserInfo{
-            id:dto.id,
-            name:dto.name,
-            nickname:dto.nickname,
-            create_time:dto.create_time,
+        UserInfo {
+            id: dto.id,
+            name: dto.name,
+            nickname: dto.nickname,
+            create_time: dto.create_time,
         }
     }
 }

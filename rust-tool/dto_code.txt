@@ -1,13 +1,13 @@
 /// DTO 对象 - 由插件生成。不应该直接更改。
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 #[serde(rename_all = "camelCase")]
-pub struct ${dtoClassName}{
+pub struct ${dtoClassName} {
     ${dtoField}
 }
 
-impl From<${className}> for ${dtoClassName}{
+impl From<${className}> for ${dtoClassName} {
     fn from(dto: ${className}) -> Self {
-        ${dtoClassName}{
+        ${dtoClassName} {
             ${fromField}
         }
     }
@@ -15,7 +15,7 @@ impl From<${className}> for ${dtoClassName}{
 
 impl From<${dtoClassName}> for ${className}{
     fn from(dto: ${dtoClassName}) -> Self {
-        ${className}{
+        ${className} {
             ${fromField}
         }
     }

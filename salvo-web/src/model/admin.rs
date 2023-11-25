@@ -1,5 +1,5 @@
 use rbatis::rbdc::datetime::DateTime;
-use serde::{Deserialize, Deserializer, Serialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 pub struct Admin {
@@ -17,12 +17,10 @@ pub struct Admin {
     pub nick_name: Option<String>,
 }
 
-
-
 /// DTO 对象 - 由插件生成。不应该直接更改。
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 #[serde(rename_all = "camelCase")]
-pub struct AdminDto{
+pub struct AdminDto {
     /// 管理员id
     pub id: Option<i64>,
     /// 账号
@@ -37,28 +35,28 @@ pub struct AdminDto{
     pub nick_name: Option<String>,
 }
 
-impl From<Admin> for AdminDto{
+impl From<Admin> for AdminDto {
     fn from(dto: Admin) -> Self {
-        AdminDto{
-            id:dto.id,
-            user_name:dto.user_name,
-            password:dto.password,
-            salt:dto.salt,
-            create_time:dto.create_time,
-            nick_name:dto.nick_name,
+        AdminDto {
+            id: dto.id,
+            user_name: dto.user_name,
+            password: dto.password,
+            salt: dto.salt,
+            create_time: dto.create_time,
+            nick_name: dto.nick_name,
         }
     }
 }
 
-impl From<AdminDto> for Admin{
+impl From<AdminDto> for Admin {
     fn from(dto: AdminDto) -> Self {
-        Admin{
-            id:dto.id,
-            user_name:dto.user_name,
-            password:dto.password,
-            salt:dto.salt,
-            create_time:dto.create_time,
-            nick_name:dto.nick_name,
+        Admin {
+            id: dto.id,
+            user_name: dto.user_name,
+            password: dto.password,
+            salt: dto.salt,
+            create_time: dto.create_time,
+            nick_name: dto.nick_name,
         }
     }
 }
