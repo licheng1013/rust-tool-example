@@ -1,7 +1,7 @@
 use salvo::prelude::*;
 use common::util::jwt;
 use common::util::result::fail;
-use common::util::thread::set_user_id;
+use common::util::thread::{set_user_id};
 use crate::{APP_CONFIG, logic};
 
 #[handler]
@@ -28,7 +28,7 @@ pub async fn plugin(_req: &mut Request, _depot: &mut Depot, res: &mut Response, 
             return;
         }
         Some(a) => {
-            println!("认证查询: {:?}", a);
+            println!("认证查询: {:?}", a.id);
             set_user_id(a.id.unwrap())
         }
     }
