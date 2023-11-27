@@ -90,10 +90,10 @@ pub fn where_condition(model: Admin) -> String {
 pub async fn login(admin: Admin) -> AppResult<Map<String, Value>> {
     println!("login = {:?}", admin);
     let err_msg = "账号或密码错误";
-    As::in_range_str(admin.user_name.clone(), 3, 12, "账号长度不正确")?;
-    As::in_range_str(admin.password.clone(), 3, 12, "密码长度不正确")?;
+    As::not_range_str(admin.user_name.clone(), 3, 12, "账号长度不正确")?;
+    As::not_range_str(admin.password.clone(), 3, 12, "密码长度不正确")?;
     let data = Admin::select_by_user_name(&mut RB.clone(), &admin.user_name.unwrap()).await.unwrap();
-    As::in_none(data.clone(),err_msg)?;
+    As::is_none(data.clone(), err_msg)?;
     let one = data.unwrap();
     let passwd = PasswdUtil::password(admin.password.unwrap().as_str(), one.salt.unwrap().as_str());
     As::is_true(passwd != one.password.unwrap(),err_msg)?;
