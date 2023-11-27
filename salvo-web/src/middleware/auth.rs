@@ -1,11 +1,11 @@
 use salvo::prelude::*;
 use common::util::jwt;
 use common::util::result::fail;
-use common::util::thread::{set_user_id};
 use crate::{APP_CONFIG, logic};
+use crate::model::admin::Admin;
 
 #[handler]
-pub async fn plugin(_req: &mut Request, _depot: &mut Depot, res: &mut Response, ctrl: &mut FlowCtrl) {
+pub async fn plugin(_req: &mut Request, depot: &mut Depot, res: &mut Response, ctrl: &mut FlowCtrl) {
     let path = _req.uri().path();
     //println!("request path: {}", path);
     if APP_CONFIG.is_exclude(&path) {
@@ -29,7 +29,19 @@ pub async fn plugin(_req: &mut Request, _depot: &mut Depot, res: &mut Response, 
         }
         Some(a) => {
             println!("认证查询: {:?}", a.id);
-            set_user_id(a.id.unwrap())
+            save_ctx(a, depot)
         }
     }
 }
+
+static SAVE_KEY: &str = "SAVE_KEY";
+
+pub fn save_ctx(a: Admin, depot: &mut Depot) {
+    // 插入数据
+    depot.insert(SAVE_KEY, a);
+}
+
+pub fn get_ctx(depot: &mut Depot) -> Admin {
+    depot.get::<Admin>(SAVE_KEY).unwrap().clone()
+}
+

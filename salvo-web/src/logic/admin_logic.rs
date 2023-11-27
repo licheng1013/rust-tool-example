@@ -1,14 +1,14 @@
 use rbatis::{crud, impl_select, impl_select_page};
 use rbatis::rbdc::datetime::DateTime;
 use rbatis::sql::PageRequest;
-use serde_json::{json, Map, Value};
-use common::util;
-use common::util::assert::As;
+use serde_json::{Map, Value};
 use common::util::jwt::JwtUtil;
 use common::util::page::{PageParam, PageResult};
 use common::util::password::PasswdUtil;
+use crate::middleware::error::{AppError, AppResult};
 use crate::model::admin::{Admin, AdminDto};
 use crate::RB;
+use crate::util::assert::As;
 
 
 const TABLE_NAME: &str = "t_admin";
@@ -22,7 +22,6 @@ impl_select!(Admin{select_by_id(val:i64) -> Option => "`where id = #{val} limit 
 
 pub async fn list(page: PageParam, model: Admin) -> PageResult<Vec<AdminDto>> {
     let condition = where_condition(model);
-    println!("{:?},{:?}", condition,get_user_id());
     let result = Admin::page(
         &mut RB.clone(),
         &PageRequest::new(page.page.unwrap_or(1)
@@ -88,38 +87,29 @@ pub fn where_condition(model: Admin) -> String {
 }
 
 
-pub async fn login(admin: Admin) -> Map<String, Value> {
+pub async fn login(admin: Admin) -> AppResult<Map<String, Value>> {
     println!("login = {:?}", admin);
     let err_msg = "账号或密码错误";
-    As::in_range_str(admin.user_name.clone(), 3, 12, err_msg);
-    As::in_range_str(admin.password.clone(), 3, 12, err_msg);
+    As::in_range_str(admin.user_name.clone(), 3, 12, "账号长度不正确")?;
+    As::in_range_str(admin.password.clone(), 3, 12, "密码长度不正确")?;
     let data = Admin::select_by_user_name(&mut RB.clone(), &admin.user_name.unwrap()).await.unwrap();
-    if data == None {
-        As::error(err_msg);
-    }
+    As::in_none(data.clone(),err_msg)?;
     let one = data.unwrap();
     let passwd = PasswdUtil::password(admin.password.unwrap().as_str(), one.salt.unwrap().as_str());
-    if passwd != one.password.unwrap() {
-        As::error(err_msg);
-    }
+    As::is_true(passwd != one.password.unwrap(),err_msg)?;
     // 构建一个map结构
     let mut map = serde_json::Map::new();
     map.insert("token".to_string(), JwtUtil::token(one.id.unwrap()).into());
-    return map;
+    return Ok(map);
 }
 
 pub(crate) async fn get(user_id: i64) -> Option<Admin> {
-    let data = Admin::select_by_id(&mut RB.clone(),  user_id).await.unwrap();
-    return data
-}
-
-// 获取用户id
-pub(crate) fn get_user_id() -> i64 {
-    return util::thread::get_user_id()
+    let data = Admin::select_by_id(&mut RB.clone(), user_id).await.unwrap();
+    return data;
 }
 
 
-pub(crate) async fn user_info() -> Map<String, Value> {
+pub(crate) async fn user_info(admin: Admin) -> Map<String, Value> {
     // 角色map
     let mut roles = serde_json::Map::new();
     roles.insert("roleName".to_string(), 1.into());
@@ -129,7 +119,7 @@ pub(crate) async fn user_info() -> Map<String, Value> {
     let mut map = serde_json::Map::new();
     map.insert("realName".to_string(), "管理员".into());
     map.insert("userName".to_string(), "管理员".into());
-    map.insert("userId".to_string(), 10.into());
+    map.insert("userId".to_string(), admin.id.unwrap().into());
     map.insert("roles".to_string(), vec![roles].into());
     return map;
 }

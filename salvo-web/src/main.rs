@@ -11,7 +11,8 @@ use common::config::config::AppConfig;
 mod api;
 pub(crate) mod logic;
 mod model;
-mod plugin;
+mod middleware;
+mod util;
 
 
 pub static RB: Lazy<RBatis> = Lazy::new(RBatis::new);
@@ -39,7 +40,7 @@ async fn main() {
     let acceptor = TcpListener::new(host.clone()).bind().await;
     let router = Router::new()
         .hoop(cors_handler.clone())
-        .hoop(plugin::auth::plugin)
+        .hoop(middleware::auth::plugin)
         .push(api::file_api::router())
         .push(api::admin_api::router())
         .push(api::user_info_api::router())

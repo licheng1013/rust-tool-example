@@ -1991,6 +1991,7 @@ dependencies = [
  "salvo",
  "serde",
  "serde_json",
+ "thiserror",
  "tokio",
 ]
 
