@@ -1,5 +1,6 @@
 use rbatis::rbdc::datetime::DateTime;
 use serde::{Deserialize, Serialize};
+use validator::Validate;
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 pub struct Admin {
@@ -18,14 +19,16 @@ pub struct Admin {
 }
 
 /// DTO 对象 - 由插件生成。不应该直接更改。
-#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq,Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct AdminDto {
     /// 管理员id
     pub id: Option<i64>,
     /// 账号
+    #[validate(length(min = 3,max = 16, message  = "账号长度为3-16位"))]
     pub user_name: Option<String>,
     /// 密码
+    #[validate(length(min = 3,max = 16, message  = "密码长度为3-16位"))]
     pub password: Option<String>,
     /// 盐
     pub salt: Option<String>,

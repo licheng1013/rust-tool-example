@@ -23,3 +23,5 @@ rbdc-mysql={version= "4.3.12" }
 
 # 错误处理
 thiserror = "1.0.50"
+# 验证处理
+validator = { version = "0.16", features = ["derive"] }

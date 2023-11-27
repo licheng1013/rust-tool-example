@@ -1,5 +1,6 @@
 use salvo::prelude::*;
 use serde_json::{Map, Value};
+use validator::{Validate, ValidationErrors};
 use crate::logic;
 use crate::model::admin::{Admin, AdminDto};
 use common::util::page::PageParam;
@@ -47,6 +48,15 @@ async fn insert(_req: &mut Request, res: &mut Response) {
 #[handler]
 async fn login(_req: &mut Request, res: &mut Response)  {
     let model: AdminDto = _req.parse_json().await.unwrap();
+    match model.validate() {
+        Ok(_) => {}
+        Err(v) => {
+            // 获取第一个错误信息
+            res.render(Json(fail(v.to_string())));
+            return;
+        }
+    };
+
     let map = logic::admin_logic::login(Admin::from(model)).await;
     match map {
         Ok(ok) => {
