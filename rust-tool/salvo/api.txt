@@ -2,8 +2,9 @@ use rbatis::sql::PageRequest;
 use salvo::prelude::*;
 use crate::logic;
 use crate::model::${tableName}::{${className}, ${className}Dto};
-use common::util::page::PageParam;
-use common::util::result::{ok_data, ok_msg};
+use common::util::page::{PageParam, PageResult};
+use crate::middleware::error::AppResult;
+use crate::util::result::JsonResult;
 
 #[handler]
 async fn list(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<PageResult<Vec<${className}Dto>>>> {
@@ -20,8 +21,8 @@ async fn update(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<
 
 #[handler]
 async fn delete(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<()>> {
-    let model: Vec<i64> = _req.parse_json().await.unwrap();
-    return logic::${tableName}_logic::delete(model).await;
+    let model: ${className} = _req.parse_json().await.unwrap();
+    return logic::${tableName}_logic::delete(${className}::from(model)).await;
 }
 
 #[handler]

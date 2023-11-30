@@ -2,36 +2,33 @@ use rbatis::sql::PageRequest;
 use salvo::prelude::*;
 use crate::logic;
 use crate::model::user_info::{UserInfo, UserInfoDto};
-use common::util::page::PageParam;
-use common::util::result::{ok_data, ok_msg};
+use common::util::page::{PageParam, PageResult};
+use crate::middleware::error::AppResult;
+use crate::util::result::JsonResult;
 
 #[handler]
-async fn list(_req: &mut Request, res: &mut Response) {
+async fn list(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<PageResult<Vec<UserInfoDto>>>> {
     let model: UserInfoDto = _req.parse_queries().unwrap();
     let page: PageParam = _req.parse_queries().unwrap();
-    let data = logic::user_info_logic::list(page, UserInfo::from(model)).await;
-    res.render(Json(ok_data(&data)));
+    return logic::user_info_logic::list(page, UserInfo::from(model)).await;
 }
 
 #[handler]
-async fn update(_req: &mut Request, res: &mut Response) {
+async fn update(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<()>> {
     let model: UserInfoDto = _req.parse_json().await.unwrap();
-    logic::user_info_logic::update(UserInfo::from(model)).await;
-    res.render(Json(ok_data("修改成功!")));
+    return logic::user_info_logic::update(UserInfo::from(model)).await;
 }
 
 #[handler]
-async fn delete(_req: &mut Request, res: &mut Response) {
-    let model: Vec<i64> = _req.parse_json().await.unwrap();
-    logic::user_info_logic::delete(model).await;
-    res.render(Json(ok_data("删除成功!")));
+async fn delete(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<()>> {
+    let model: UserInfo = _req.parse_json().await.unwrap();
+    return logic::user_info_logic::delete(UserInfo::from(model)).await;
 }
 
 #[handler]
-async fn insert(_req: &mut Request, res: &mut Response) {
+async fn insert(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<()>> {
     let model: UserInfoDto = _req.parse_json().await.unwrap();
-    logic::user_info_logic::insert(UserInfo::from(model)).await;
-    res.render(Json(ok_data("插入成功!")));
+    return logic::user_info_logic::insert(UserInfo::from(model)).await;
 }
 
 pub fn router() -> Router {

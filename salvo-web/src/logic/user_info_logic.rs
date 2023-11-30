@@ -5,13 +5,15 @@ use rbatis::sql::PageRequest;
 use crate::model::user_info::{UserInfo, UserInfoDto};
 use crate::RB;
 use common::util::page::{PageParam, PageResult};
+use crate::middleware::error::AppResult;
+use crate::util::result::{JsonResult, ok_data, ok_msg};
 
 const TABLE_NAME: &str = "t_user_info";
 
 crud!(UserInfo{},TABLE_NAME);
 impl_select_page!(UserInfo{page(where_str:&str) => "${where_str}"},TABLE_NAME);
 
-pub async fn list(page: PageParam, model: UserInfo) -> PageResult<Vec<UserInfoDto>> {
+pub async fn list(page: PageParam, model: UserInfo) -> AppResult<JsonResult<PageResult<Vec<UserInfoDto>>>> {
     let condition = where_condition(model);
     println!("{condition:?}");
     let result = UserInfo::page(
@@ -24,32 +26,26 @@ pub async fn list(page: PageParam, model: UserInfo) -> PageResult<Vec<UserInfoDt
     for item in result.records {
         list.push(UserInfoDto::from(item));
     }
-    return PageResult {
+    return Ok(ok_data(PageResult {
         total: result.total,
         list,
-    };
+    }));
 }
 
-pub async fn update(model: UserInfo) {
-    let result = UserInfo::update_by_column(&mut RB.clone()
-                                         , &model, "id").await.unwrap();
-    println!("{result:?}")
+pub async fn update(model: UserInfo) -> AppResult<JsonResult<()>> {
+    let result = UserInfo::update_by_column(&mut RB.clone(), &model, "id").await.unwrap();
+    return Ok(ok_msg("修改成功".to_string()));
 }
 
-pub async fn delete(ids: Vec<i64>) {
-   if ids.len() > 1 || ids[0] == 0 {
-        println!("{:?}", "不允许批量删除-或数值为0");
-        return;
-    }
-    let result = UserInfo::delete_by_column(&mut RB.clone(), "id"
-                                         , ids[0]).await.unwrap();
-    println!("{result:?}")
+pub async fn delete(model: UserInfo) -> AppResult<JsonResult<()>> {
+    UserInfo::delete_by_column(&mut RB.clone(), "id", model.id).await.unwrap();
+    return Ok(ok_msg("删除成功".to_string()));
 }
 
-pub async fn insert(mut model: UserInfo) {
+pub async fn insert(mut model: UserInfo) -> AppResult<JsonResult<()>> {
     model.create_time = Some(DateTime::now());
-    let result = UserInfo::insert(&mut RB.clone(), &model).await.unwrap();
-    println!("{result:?}")
+    UserInfo::insert(&mut RB.clone(), &model).await.unwrap();
+    return Ok(ok_msg("插入成功".to_string()));
 }
 
 pub fn where_condition(model: UserInfo) -> String {
