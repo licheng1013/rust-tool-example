@@ -169,7 +169,7 @@ function handleDelete(record: Recordable) {
     title: "提示",
     content: "你正在进行删除操作...",
     onOk: async () => {
-      adminDelete([record.id]).then(res => {
+      adminDelete({id:record.id}).then(res => {
         success("删除成功,此处用于演示");
         reload();
       });

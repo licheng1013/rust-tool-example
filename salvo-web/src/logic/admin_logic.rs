@@ -10,7 +10,7 @@ use crate::middleware::error::{AppError, AppResult};
 use crate::model::admin::{Admin, AdminDto};
 use crate::RB;
 use crate::util::assert::As;
-use crate::util::result::{JsonResult, ok_data};
+use crate::util::result::{JsonResult, ok_data, ok_msg};
 
 
 const TABLE_NAME: &str = "t_admin";
@@ -22,7 +22,7 @@ impl_select!(Admin{select_by_id(val:i64) -> Option => "`where id = #{val} limit 
 
 //@Rbatis(Admin)
 
-pub async fn list(page: PageParam, model: Admin) -> PageResult<Vec<AdminDto>> {
+pub async fn list(page: PageParam, model: Admin) -> AppResult<JsonResult<PageResult<Vec<AdminDto>>>> {
     let condition = where_condition(model);
     let result = Admin::page(
         &mut RB.clone(),
@@ -34,31 +34,32 @@ pub async fn list(page: PageParam, model: Admin) -> PageResult<Vec<AdminDto>> {
     for item in result.records {
         list.push(AdminDto::from(item));
     }
-    return PageResult {
+    return Ok(ok_data(PageResult {
         total: result.total,
         list,
-    };
+    }));
 }
 
-pub async fn update(model: Admin) {
-    let result = Admin::update_by_column(&mut RB.clone()
-                                         , &model, "id").await.unwrap();
-    println!("{result:?}")
+pub async fn update(model: Admin) -> AppResult<JsonResult<()>> {
+    Admin::update_by_column(&mut RB.clone(), &model, "id").await.unwrap();
+    return Ok(ok_msg("修改成功".to_string()));
 }
 
-pub async fn delete(ids: Vec<i64>) {
-    if true {
-        println!("{:?}", "不允许批量删除-或数值为0");
-        return;
-    }
-    let id = ids[0];
-    Admin::delete_by_column(&mut RB.clone(), "id", id).await.unwrap();
+pub async fn delete(model: AdminDto) -> AppResult<JsonResult<()>> {
+    As::error("演示模式")?;
+    Admin::delete_by_column(&mut RB.clone(), "id", model.id).await.unwrap();
+    return Ok(ok_msg("删除成功".to_string()));
 }
 
-pub async fn insert(mut model: Admin) {
+pub async fn insert(mut model: Admin) -> AppResult<JsonResult<()>> {
     model.create_time = Some(DateTime::now());
+    As::empty_str(model.clone().nick_name,"昵称为空")?;
+    As::empty_str(model.clone().user_name,"名称为空")?;
+    As::empty_str(model.clone().password,"密码为空")?;
+    As::empty_str(model.clone().salt,"盐为空")?;
     let result = Admin::insert(&mut RB.clone(), &model).await.unwrap();
-    println!("{result:?}")
+    println!("{result:?}");
+    return Ok(ok_msg("插入成功".to_string()));
 }
 
 pub fn where_condition(model: Admin) -> String {
@@ -98,7 +99,7 @@ pub async fn login(admin: Admin) -> AppResult<JsonResult<Map<String, Value>>> {
     As::is_none(data.clone(), err_msg)?;
     let one = data.unwrap();
     let passwd = PasswdUtil::password(admin.password.unwrap().as_str(), one.salt.unwrap().as_str());
-    As::is_true(passwd != one.password.unwrap(),err_msg)?;
+    As::is_true(passwd != one.password.unwrap(), err_msg)?;
     // 构建一个map结构
     let mut map = serde_json::Map::new();
     map.insert("token".to_string(), JwtUtil::token(one.id.unwrap()).into());
@@ -111,7 +112,7 @@ pub(crate) async fn get(user_id: i64) -> Option<Admin> {
 }
 
 
-pub(crate) async fn user_info(admin: Admin) -> Map<String, Value> {
+pub(crate) async fn user_info(admin: Admin) -> AppResult<JsonResult<Map<String, Value>>> {
     // 角色map
     let mut roles = serde_json::Map::new();
     roles.insert("roleName".to_string(), 1.into());
@@ -123,5 +124,5 @@ pub(crate) async fn user_info(admin: Admin) -> Map<String, Value> {
     map.insert("userName".to_string(), "管理员".into());
     map.insert("userId".to_string(), admin.id.unwrap().into());
     map.insert("roles".to_string(), vec![roles].into());
-    return map;
+    return Ok(ok_data(map));
 }
