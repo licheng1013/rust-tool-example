@@ -2,7 +2,7 @@
   "apiBox": true,
   "apiPath": "$PROJECT$/salvo-web/src/api",
   "apiSuffix": "_api.rs",
-  "autoModPath": "$PROJECT$/actix-web",
+  "autoModPath": "$PROJECT$/salvo-web/src",
   "dtoBox": true,
   "dtoSuffix": "Dto",
   "logicBox": true,
