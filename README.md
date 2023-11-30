@@ -22,14 +22,14 @@
 - 1.克隆项目
 - 2.导入`t_gorm.sql` 到你的数据库
 - 3.修改 `config.yml` 文件中的数据库链接
-- 4.启动 `salvo-web/src/main.rs` 或 `actix-web/src/main.rs` 文件就可以运行项目了
+- 4.启动 `salvo-web/src/main.rs` 文件就可以运行项目了
+- 注意: `actix-web目录` 不需要可以直接删除，目前主要的是适配 `salvo-web` 目录
 
 ### 前端
 
 - 1.view目录下的运行 `pnpm i`
 - 2.运行 `pnpm run dev` 即可运行前端项目
 - 3.打包 `pnpm run build` 即可打包前端项目
-
 
 ## RustTool插件教程
 
@@ -39,7 +39,6 @@
 - 大致上来讲：`RustTool` 插件是一个代码生成工具。同时对于管理项目也起到了一定的帮助
 - 例如: API导航，API文档导出，自动导入mod.rs等功能，或者复制前端请求代码。
 - 这些功能虽然不是非必要的，但是能够提高开发效率。取决在于时间的取舍。
-
 
 ### 功能
 
@@ -100,4 +99,5 @@
 
 ## 反馈
 
-- 请通过issue反馈bug或者建议 [https://github.com/licheng1013/rust-tool-example/issues](https://github.com/licheng1013/rust-tool-example/issues)_
+-
+请通过issue反馈bug或者建议 [https://github.com/licheng1013/rust-tool-example/issues](https://github.com/licheng1013/rust-tool-example/issues)_

@@ -13,5 +13,9 @@
   "packagePath": "$PROJECT$/salvo-web/src",
   "prefix": "t_",
   "url": "http://localhost:8080",
+  "viewApiPath": "$PROJECT$/salvo-web",
+  "viewPagePath": "$PROJECT$/salvo-web",
+  "viewRouterPath": "$PROJECT$/salvo-web",
+  "viewSuffix": "Page.vue",
   "webBox": 1
 }

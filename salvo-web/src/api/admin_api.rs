@@ -4,7 +4,6 @@ use validator::{Validate, ValidationErrors};
 use crate::logic;
 use crate::model::admin::{Admin, AdminDto};
 use common::util::page::{PageParam, PageResult};
-use common::util::result::{fail, ok_data, ok_msg};
 use crate::middleware::auth::get_ctx;
 use crate::middleware::error::AppResult;
 use crate::util::result::JsonResult;
