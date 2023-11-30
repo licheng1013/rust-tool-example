@@ -33,7 +33,7 @@ pub async fn list(page: PageParam, model: ${className}) -> AppResult<JsonResult<
 }
 
 pub async fn update(model: ${className}) -> AppResult<JsonResult<()>> {
-    let result = ${className}::update_by_column(&mut RB.clone(), &model, "id").await.unwrap();
+    ${className}::update_by_column(&mut RB.clone(), &model, "id").await.unwrap();
     return Ok(ok_msg("修改成功".to_string()));
 }
 
