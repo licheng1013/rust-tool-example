@@ -45,13 +45,13 @@ const schemas: FormSchema[] = [
     field: `name`,
     component: 'Input',
     label: `名称`,
-    required: true,
+    required: false,
   },
   {
     field: `nickname`,
     component: 'Input',
     label: `昵称`,
-    required: true,
+    required: false,
   },
 
 ];
@@ -152,7 +152,7 @@ function handleDelete(record: Recordable) {
     title: "提示",
     content: "你正在进行删除操作...",
     onOk: async () => {
-      userInfoDelete([record.id]).then(res => {
+      userInfoDelete({id:record.id}).then(res => {
         success("删除成功");
         reload();
       });

@@ -6,32 +6,28 @@ use common::util::page::PageParam;
 use common::util::result::{ok_data, ok_msg};
 
 #[handler]
-async fn list(_req: &mut Request, res: &mut Response) {
+async fn list(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<PageResult<Vec<${className}Dto>>>> {
     let model: ${className}Dto = _req.parse_queries().unwrap();
     let page: PageParam = _req.parse_queries().unwrap();
-    let data = logic::${tableName}_logic::list(page, ${className}::from(model)).await;
-    res.render(Json(ok_data(&data)));
+    return logic::${tableName}_logic::list(page, ${className}::from(model)).await;
 }
 
 #[handler]
-async fn update(_req: &mut Request, res: &mut Response) {
+async fn update(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<()>> {
     let model: ${className}Dto = _req.parse_json().await.unwrap();
-    logic::${tableName}_logic::update(${className}::from(model)).await;
-    res.render(Json(ok_data("修改成功!")));
+    return logic::${tableName}_logic::update(${className}::from(model)).await;
 }
 
 #[handler]
-async fn delete(_req: &mut Request, res: &mut Response) {
+async fn delete(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<()>> {
     let model: Vec<i64> = _req.parse_json().await.unwrap();
-    logic::${tableName}_logic::delete(model).await;
-    res.render(Json(ok_data("删除成功!")));
+    return logic::${tableName}_logic::delete(model).await;
 }
 
 #[handler]
-async fn insert(_req: &mut Request, res: &mut Response) {
+async fn insert(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<()>> {
     let model: ${className}Dto = _req.parse_json().await.unwrap();
-    logic::${tableName}_logic::insert(${className}::from(model)).await;
-    res.render(Json(ok_data("插入成功!")));
+    return logic::${tableName}_logic::insert(${className}::from(model)).await;
 }
 
 pub fn router() -> Router {

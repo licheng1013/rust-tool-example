@@ -5,13 +5,15 @@ use rbatis::sql::PageRequest;
 use crate::model::${tableName}::{${className}, ${className}Dto};
 use crate::RB;
 use common::util::page::{PageParam, PageResult};
+use crate::middleware::error::AppResult;
+use crate::util::result::{JsonResult, ok_data, ok_msg};
 
 const TABLE_NAME: &str = "${table}";
 
 crud!(${className}{},TABLE_NAME);
 impl_select_page!(${className}{page(where_str:&str) => "${where_str}"},TABLE_NAME);
 
-pub async fn list(page: PageParam, model: ${className}) -> PageResult<Vec<${className}Dto>> {
+pub async fn list(page: PageParam, model: ${className}) -> AppResult<JsonResult<PageResult<Vec<${className}Dto>>>> {
     let condition = where_condition(model);
     println!("{condition:?}");
     let result = ${className}::page(
@@ -24,32 +26,26 @@ pub async fn list(page: PageParam, model: ${className}) -> PageResult<Vec<${clas
     for item in result.records {
         list.push(${className}Dto::from(item));
     }
-    return PageResult {
+    return Ok(ok_data(PageResult {
         total: result.total,
         list,
-    };
+    }));
 }
 
-pub async fn update(model: ${className}) {
-    let result = ${className}::update_by_column(&mut RB.clone()
-                                         , &model, "id").await.unwrap();
-    println!("{result:?}")
+pub async fn update(model: ${className}) -> AppResult<JsonResult<()>> {
+    let result = ${className}::update_by_column(&mut RB.clone(), &model, "id").await.unwrap();
+    return Ok(ok_msg("修改成功".to_string()));
 }
 
-pub async fn delete(ids: Vec<i64>) {
-   if ids.len() > 1 || ids[0] == 0 {
-        println!("{:?}", "不允许批量删除-或数值为0");
-        return;
-    }
-    let result = ${className}::delete_by_column(&mut RB.clone(), "id"
-                                         , ids[0]).await.unwrap();
-    println!("{result:?}")
+pub async fn delete(model: ${className}) -> AppResult<JsonResult<()>> {
+    ${className}::delete_by_column(&mut RB.clone(), "id", model.id).await.unwrap();
+    return Ok(ok_msg("删除成功".to_string()));
 }
 
-pub async fn insert(mut model: ${className}) {
+pub async fn insert(mut model: ${className}) -> AppResult<JsonResult<()>> {
     model.create_time = Some(DateTime::now());
-    let result = ${className}::insert(&mut RB.clone(), &model).await.unwrap();
-    println!("{result:?}")
+    ${className}::insert(&mut RB.clone(), &model).await.unwrap();
+    return Ok(ok_msg("插入成功".to_string()));
 }
 
 pub fn where_condition(model: ${className}) -> String {
