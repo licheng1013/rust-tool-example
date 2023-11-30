@@ -1,5 +1,5 @@
 port: 8080
 # 数据库链接
-mysql_url: mysql://root:root@192.168.101.90/t_gorm
+mysql_url: mysql://root:root@192.168.56.101/t_gorm
 exclude_path:
   - /admin/login
