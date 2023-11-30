@@ -7,6 +7,7 @@ use common::util::page::PageParam;
 use common::util::result::{fail, ok_data, ok_msg};
 use crate::middleware::auth::get_ctx;
 use crate::middleware::error::{AppError, AppResult};
+use crate::util::result::JsonResult;
 
 ///
 /// @Param(size=2,user_name=admin)
@@ -46,37 +47,15 @@ async fn insert(_req: &mut Request, res: &mut Response) {
 /// @Param(user_name=admin,password=123456)
 ///
 #[handler]
-async fn login(_req: &mut Request, res: &mut Response)  {
+async fn login(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<Map<String, Value>>> {
     let model: AdminDto = _req.parse_json().await.unwrap();
-    match model.validate() {
-        Ok(_) => {}
-        Err(v) => {
-            // 获取第一个错误信息
-            res.render(Json(fail(v.to_string())));
-            return;
-        }
-    };
-
     let map = logic::admin_logic::login(Admin::from(model)).await;
-    match map {
-        Ok(ok) => {
-            res.render(Json(ok_data(&ok)));
-        }
-        Err(err) => {
-            println!("{:?}", err);
-            // 判断错误类型
-            match err {
-                AppError::Service { error_info } => {
-                    res.render(Json(fail(error_info)));
-                }
-            }
-        }
-    }
+    return map;
 }
 
 
 #[handler]
-async fn user_info(_req: &mut Request, res: &mut Response,depot: &mut Depot) {
+async fn user_info(_req: &mut Request, res: &mut Response, depot: &mut Depot) {
     let admin = get_ctx(depot);
     let map = logic::admin_logic::user_info(admin).await;
     res.render(Json(ok_data(&map)));

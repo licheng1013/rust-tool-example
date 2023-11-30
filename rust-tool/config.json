@@ -12,6 +12,6 @@
   "modelPath": "$PROJECT$/salvo-web/src/model",
   "packagePath": "$PROJECT$/salvo-web/src",
   "prefix": "t_",
-  "url": "http://localhost:5800",
+  "url": "http://localhost:8080",
   "webBox": 1
 }

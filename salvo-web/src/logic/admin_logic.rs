@@ -1,6 +1,7 @@
 use rbatis::{crud, impl_select, impl_select_page};
 use rbatis::rbdc::datetime::DateTime;
 use rbatis::sql::PageRequest;
+use salvo::prelude::Json;
 use serde_json::{Map, Value};
 use common::util::jwt::JwtUtil;
 use common::util::page::{PageParam, PageResult};
@@ -9,6 +10,7 @@ use crate::middleware::error::{AppError, AppResult};
 use crate::model::admin::{Admin, AdminDto};
 use crate::RB;
 use crate::util::assert::As;
+use crate::util::result::{JsonResult, ok_data};
 
 
 const TABLE_NAME: &str = "t_admin";
@@ -87,7 +89,7 @@ pub fn where_condition(model: Admin) -> String {
 }
 
 
-pub async fn login(admin: Admin) -> AppResult<Map<String, Value>> {
+pub async fn login(admin: Admin) -> AppResult<JsonResult<Map<String, Value>>> {
     println!("login = {:?}", admin);
     let err_msg = "账号或密码错误";
     As::not_range_str(admin.user_name.clone(), 3, 12, "账号长度不正确")?;
@@ -100,7 +102,7 @@ pub async fn login(admin: Admin) -> AppResult<Map<String, Value>> {
     // 构建一个map结构
     let mut map = serde_json::Map::new();
     map.insert("token".to_string(), JwtUtil::token(one.id.unwrap()).into());
-    return Ok(map);
+    return Ok(ok_data(map));
 }
 
 pub(crate) async fn get(user_id: i64) -> Option<Admin> {
