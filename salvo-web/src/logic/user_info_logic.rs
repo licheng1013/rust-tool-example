@@ -1,4 +1,3 @@
-use std::future::IntoFuture;
 use rbatis::{crud, impl_select_page};
 use rbatis::rbdc::datetime::DateTime;
 use rbatis::sql::PageRequest;

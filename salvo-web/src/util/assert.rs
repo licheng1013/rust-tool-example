@@ -1,10 +1,10 @@
 use crate::middleware::error::{AppError, AppResult};
-use crate::model::admin::Admin;
 
 pub struct As {}
 
 
 /// 这里是断言工具
+
 impl As {
     /// 空字符串验证
     pub fn empty_str(msg: Option<String>, err_msg: &str) -> AppResult<()> {
@@ -64,7 +64,7 @@ mod tests {
 
     #[test]
     fn test_empty_num() {
-        As::empty_num(Some(11), "数字空");
+        As::empty_num(Some(11), "数字空").expect("TODO: panic message");
     }
 
     #[test]

@@ -1,6 +1,5 @@
 use salvo::prelude::*;
 use serde_json::{Map, Value};
-use validator::{Validate, ValidationErrors};
 use crate::logic;
 use crate::model::admin::{Admin, AdminDto};
 use common::util::page::{PageParam, PageResult};
@@ -12,7 +11,7 @@ use crate::util::result::JsonResult;
 /// @Param(size=2,user_name=admin)
 ///
 #[handler]
-async fn list(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<PageResult<Vec<AdminDto>>>> {
+async fn list(_req: &mut Request) -> AppResult<JsonResult<PageResult<Vec<AdminDto>>>> {
     let model: AdminDto = _req.parse_queries().unwrap();
     let page: PageParam = _req.parse_queries().unwrap();
     return logic::admin_logic::list(page, Admin::from(model)).await;
@@ -20,19 +19,19 @@ async fn list(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<Pa
 
 
 #[handler]
-async fn update(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<()>> {
+async fn update(_req: &mut Request) -> AppResult<JsonResult<()>> {
     let model: AdminDto = _req.parse_json().await.unwrap();
     return logic::admin_logic::update(Admin::from(model)).await;
 }
 
 #[handler]
-async fn delete(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<()>> {
+async fn delete(_req: &mut Request) -> AppResult<JsonResult<()>> {
     let model: AdminDto = _req.parse_json().await.unwrap();
     return logic::admin_logic::delete(model).await;
 }
 
 #[handler]
-async fn insert(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<()>> {
+async fn insert(_req: &mut Request) -> AppResult<JsonResult<()>> {
     let model: AdminDto = _req.parse_json().await.unwrap();
     return logic::admin_logic::insert(Admin::from(model)).await;
 }
@@ -40,7 +39,7 @@ async fn insert(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<
 
 /// @Param(user_name=admin,password=123456)
 #[handler]
-async fn login(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<Map<String, Value>>> {
+async fn login(_req: &mut Request) -> AppResult<JsonResult<Map<String, Value>>> {
     let model: AdminDto = _req.parse_json().await.unwrap();
     let map = logic::admin_logic::login(Admin::from(model)).await;
     return map;
@@ -48,7 +47,7 @@ async fn login(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<M
 
 
 #[handler]
-async fn user_info(_req: &mut Request, res: &mut Response, depot: &mut Depot) -> AppResult<JsonResult<Map<String, Value>>> {
+async fn user_info(_req: &mut Request, depot: &mut Depot) -> AppResult<JsonResult<Map<String, Value>>> {
     let admin = get_ctx(depot);
     let map = logic::admin_logic::user_info(admin).await;
     return map;

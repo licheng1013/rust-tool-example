@@ -1,11 +1,9 @@
 use salvo::{async_trait, Depot, Request, Response, Writer};
 use salvo::prelude::Text::Json;
-use salvo::writing::Text;
-
 
 #[async_trait]
 impl Writer for AppError {
-    async fn write(mut self, _req: &mut Request, depot: &mut Depot, res: &mut Response) {
+    async fn write(mut self, _req: &mut Request, _depot: &mut Depot, res: &mut Response) {
         match self {
             AppError::Service { error_info } => {
                 res.render(Json(fail(error_info).to_string()));

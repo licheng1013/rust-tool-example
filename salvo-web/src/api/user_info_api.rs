@@ -1,4 +1,3 @@
-use rbatis::sql::PageRequest;
 use salvo::prelude::*;
 use crate::logic;
 use crate::model::user_info::{UserInfo, UserInfoDto};
@@ -7,26 +6,26 @@ use crate::middleware::error::AppResult;
 use crate::util::result::JsonResult;
 
 #[handler]
-async fn list(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<PageResult<Vec<UserInfoDto>>>> {
+async fn list(_req: &mut Request) -> AppResult<JsonResult<PageResult<Vec<UserInfoDto>>>> {
     let model: UserInfoDto = _req.parse_queries().unwrap();
     let page: PageParam = _req.parse_queries().unwrap();
     return logic::user_info_logic::list(page, UserInfo::from(model)).await;
 }
 
 #[handler]
-async fn update(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<()>> {
+async fn update(_req: &mut Request) -> AppResult<JsonResult<()>> {
     let model: UserInfoDto = _req.parse_json().await.unwrap();
     return logic::user_info_logic::update(UserInfo::from(model)).await;
 }
 
 #[handler]
-async fn delete(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<()>> {
-    let model: UserInfo = _req.parse_json().await.unwrap();
+async fn delete(_req: &mut Request) -> AppResult<JsonResult<()>> {
+    let model: UserInfoDto = _req.parse_json().await.unwrap();
     return logic::user_info_logic::delete(UserInfo::from(model)).await;
 }
 
 #[handler]
-async fn insert(_req: &mut Request, res: &mut Response) -> AppResult<JsonResult<()>> {
+async fn insert(_req: &mut Request) -> AppResult<JsonResult<()>> {
     let model: UserInfoDto = _req.parse_json().await.unwrap();
     return logic::user_info_logic::insert(UserInfo::from(model)).await;
 }

@@ -1,6 +1,5 @@
 use rbatis::async_trait;
-use salvo::{Depot, Request, Response, Scribe, Writer};
-use salvo::prelude::Text;
+use salvo::{Depot, Request, Response, Writer};
 use salvo::prelude::Text::Json;
 use serde::{Deserialize, Serialize};
 
@@ -49,7 +48,7 @@ pub fn fail(msg: String) -> JsonResult<()> {
 
 #[async_trait]
 impl<T: Send + Serialize> Writer for JsonResult<T> {
-    async fn write( self, _req: &mut Request, depot: &mut Depot, res: &mut Response) {
+    async fn write(self, _req: &mut Request, _depot: &mut Depot, res: &mut Response) {
         res.render(Json(self.to_string()));
     }
 }

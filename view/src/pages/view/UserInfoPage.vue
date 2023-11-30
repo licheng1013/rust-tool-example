@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import {BasicColumn, BasicTable, FormSchema, useTable,TableAction} from "/@/components/Table";
-import {userInfoDelete, userInfoInsert, userInfoList} from "/@/pages/api/userInfo";
+import {userInfoDelete, userInfoInsert, userInfoList} from "/@/pages/api/user_info";
 import {formatToDateTime} from "@/utils/dateUtil";
 import {useMessage} from "@/hooks/web/useMessage";
 import { BasicModal, useModal } from "@/components/Modal";
@@ -83,22 +83,6 @@ const [registerForm, {submit, resetFields}] = useForm({
 
 
 const columns: BasicColumn[] = [
-    {
-      title: "主键",
-      dataIndex: "id",
-    },
-    {
-      title: "名称",
-      dataIndex: "name",
-    },
-    {
-      title: "昵称",
-      dataIndex: "nickname",
-    },
-    {
-      title: "创建时间",
-      dataIndex: "createTime",
-    },
 
 ];
 
