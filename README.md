@@ -66,6 +66,18 @@
 
 ## 功能演示
 
+### 代码生成
+
+- `后端生成`
+- ![](images/rust-tool-code.gif)
+
+- `前端生成`
+- ![](images/rust-tool-view.gif)
+
+- `示例`
+- ![](images/rust-tool-demo.gif)
+
+
 ### Api测试功能
 
 - (2023.9.18+)版本
