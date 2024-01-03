@@ -5,7 +5,7 @@ members = [
     "salvo-web",
     "actix-web",
     "common",
-    "auxm-demo"
+    "axum-demo"
 ]
 
 exclude = [
