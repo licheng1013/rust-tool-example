@@ -9,7 +9,7 @@
 - 你可以当作学习 `rust web` 项目的开发。 或者学习 `RustTool` 插件的使用。
 - 插件下载地址: [RustTool](https://plugins.jetbrains.com/plugin/22428-rusttool)
 - 注意: 如果在插件商店内搜索不到插件，`请更新你的开发工具(如IDEA)至最新版`。
-- 交流群: `289132257`
+- 交流QQ群: `289132257`
 
 ## 入门
 
@@ -78,6 +78,15 @@
 - `示例`
 - ![](images/rust-tool-demo.gif)
 
+### 路由导航
+
+- ![](images/router-demo.gif)
+
+### DTO生成
+
+- ![](images/dto-demo.gif)
+
+
 ### Api测试功能
 
 - (2023.9.18+)版本
@@ -101,18 +110,7 @@
 - 注意: html标签是根据方法前缀来识别创建相应的标签，如select_xx -> select标签,默认也是select标签。
 - ![](images/doc2.png)
 
-### 从方法直接打开url到浏览器
-
-- ![](images/doc3.png)
-
-### Api共享功能
-
-- (2023.9.11+)版本
-- ![](images/doc4.png)
-- [https://licheng1013.github.io/toy-flutter/#/](https://licheng1013.github.io/toy-flutter/#/)
 
 ## 反馈
 
--
-
-请通过issue反馈bug或者建议 [https://github.com/licheng1013/rust-tool-example/issues](https://github.com/licheng1013/rust-tool-example/issues)_
+- 请通过issue反馈bug或者建议 [https://github.com/licheng1013/rust-tool-example/issues](https://github.com/licheng1013/rust-tool-example/issues)_
