@@ -1,13 +1,14 @@
 use salvo::prelude::*;
-use common::util::jwt;
-use crate::{APP_CONFIG, logic};
+
 use crate::model::admin::Admin;
-use crate::util::result::fail;
 
 #[handler]
 pub async fn plugin(_req: &mut Request, depot: &mut Depot, res: &mut Response, ctrl: &mut FlowCtrl) {
     let path = _req.uri().path();
-    //println!("request path: {}", path);
+    let method = _req.method().as_str();
+    // 打印请求路径
+    println!("[RustTool] {} - \"{}\"", method, path);
+
     if APP_CONFIG.is_exclude(&path) {
         return;
     }

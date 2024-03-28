@@ -43,27 +43,27 @@
 
 ### 功能
 
-- 🆗代表支持,❌暂不支持.
+- 🆗代表支持,❌暂不支持.⚓不在支持此功能
 
-| 框架/插件                       | 功能                  | 支持) | 版本         |
-|-----------------------------|---------------------|-----|------------|
-| actix-web / salvo +  rbatis | 路由导航                | 🆗  |            |
-| actix-web / salvo +  rbatis | 增删改查代码生成            | 🆗  |            |
-| actix-web / salvo           | Api文档导出             | 🆗  |            |
-| actix-web / salvo           | 打开URL               | 🆗  | 2023.9.10+ |
-| axum                        | 路由导航 / 打开URL / 复制路径 | 🆗  | 2024.1.1+  |
-| rust-tool                   | 创建目录时创建mod文件        | 🆗  |            |
-| rust-tool                   | mod自动关联目录下新rs文件     | 🆗  |            |
-| rust-tool                   | api共享功能             | 🆗  | 2023.9.11+ |
-| rust-tool                   | api请求测试功能           | 🆗  | 2023.9.18+ |
-| rust-tool                   | 前端请求代码(全栈开发)        | 🆗  | 2023.9.19+ |
-| rust-tool                   | 类转换为DTO             | 🆗  | 2023.9.21+ |
-| rust-tool                   | 生成模板时自动创建DTO        | 🆗  | 2023.9.22+ |
-| rust-tool                   | 增加前端模板生成            | 🆗  | 2023.9.22+ |
-| rbatis                      | html和方法导航或创建        | 🆗  |            |
-| rbatis                      | Rbatis单字段查询补全       | 🆗  | 2023.9.21+ |
-| rbatis                      | 方法上出现预览sql按钮        | 🆗  |            |
-| rust-tool                   | SDK扩展               | ❌   |            |
+| 框架/插件                       | 功能                  | 状态 | 版本         |
+|-----------------------------|---------------------|----|------------|
+| actix-web / salvo +  rbatis | 路由导航                | 🆗 |            |
+| actix-web / salvo +  rbatis | 增删改查代码生成            | 🆗 |            |
+| actix-web / salvo           | Api文档导出             | 🆗 |            |
+| actix-web / salvo           | 打开URL               | 🆗 | 2023.9.10+ |
+| axum                        | 路由导航 / 打开URL / 复制路径 | 🆗 | 2024.1.1+  |
+| rust-tool                   | 创建目录时创建mod文件        | ⚓  |            |
+| rust-tool                   | mod自动关联目录下新rs文件     | ⚓  |            |
+| rust-tool                   | api共享功能             | ⚓  | 2023.9.11+ |
+| rust-tool                   | api请求测试功能           | ⚓  | 2023.9.18+ |
+| rust-tool                   | 前端请求代码(全栈开发)        | 🆗 | 2023.9.19+ |
+| rust-tool                   | 类转换为DTO             | 🆗 | 2023.9.21+ |
+| rust-tool                   | 生成模板时自动创建DTO        | 🆗 | 2023.9.22+ |
+| rust-tool                   | 增加前端模板生成            | 🆗 | 2023.9.22+ |
+| rbatis                      | html和方法导航或创建        | 🆗 |            |
+| rbatis                      | Rbatis单字段查询补全       | 🆗 | 2023.9.21+ |
+| rbatis                      | 方法上出现预览sql按钮        | 🆗 |            |
+| rust-tool                   | SDK扩展               | ❌  |            |
 
 ## 功能演示
 
