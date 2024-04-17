@@ -1873,6 +1873,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "rbatis-example"
+version = "0.1.0"
+dependencies = [
+ "rbatis",
+ "rbdc-mysql",
+ "rbs",
+ "serde",
+ "serde_json",
+ "tokio",
+]
+
+[[package]]
 name = "rbatis-macro-driver"
 version = "4.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"

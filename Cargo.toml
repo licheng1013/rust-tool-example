@@ -6,7 +6,7 @@ members = [
     "actix-web",
     "common",
     "axum-demo"
-]
+, "rbatis-example"]
 
 exclude = [
 
