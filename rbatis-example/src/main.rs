@@ -17,9 +17,6 @@ pub struct User {
     pub create_time: Option<DateTime>,
 }
 
-//@Rbatis(User)
-impl_select!(User{select_by_id(val:&str) -> Option => "`where id = #{val} limit 1`"},TABLE_NAME);
-
 
 crud!(User {},"t_user"); // impl_insert!($table {}) + impl_select!($table {}) + impl_update!($table {}) + impl_delete!($table {});
 
