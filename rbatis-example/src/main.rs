@@ -1,4 +1,5 @@
-use rbatis::{crud, impl_select, RBatis};
+use rbatis::{crud, html_sql, impl_select, RBatis};
+use rbatis::executor::Executor;
 use rbatis::rbatis_codegen::ops::AsProxy;
 use rbatis::rbdc::datetime::DateTime;
 use serde_json::json;
@@ -18,6 +19,22 @@ pub struct User {
 }
 
 
+#[html_sql(
+r#"<select id="select_by_condition">
+        `select * from t_user`
+        <where>
+             ` and tel = #{user.tel}`
+        </where>
+  </select>"#
+)]
+async fn select_by_condition(
+    rb: &dyn Executor,
+    user: User,
+) -> rbatis::Result<Vec<User>> {
+    impled!()
+}
+
+
 crud!(User {},"t_user"); // impl_insert!($table {}) + impl_select!($table {}) + impl_update!($table {}) + impl_delete!($table {});
 
 #[tokio::main]
@@ -33,7 +50,9 @@ pub async fn main() {
         create_time: Some(DateTime::now()),
     };
     let tables = [table.clone(), {
-        table.clone()
+        let mut k = table.clone();
+        k.tel = Some("3".into());
+        k
     }];
 
     let data = User::insert(&rb, &table).await;
@@ -42,9 +61,9 @@ pub async fn main() {
     println!("insert_batch = {}", json!(data));
     let data = User::select_by_column(&rb, "name", 2).await;
     println!("select_in_column = {}", json!(data));
-    let data = User::delete_by_column(&rb, "", 33).await;
+    let data = select_by_condition(&rb,table).await;
+    println!("select_by_condition = {}", json!(data));
+    let data = User::delete_by_column(&rb, "name", 2).await;
     println!("delete_in_column = {}", json!(data));
-    let v = User::select_by_column(&rb,"","");
-    User::select_by_column(&rb,"U","");
 }
 
