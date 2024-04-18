@@ -1,7 +1,7 @@
-use rbatis::{crud, html_sql, impl_select, RBatis};
 use rbatis::executor::Executor;
 use rbatis::rbatis_codegen::ops::AsProxy;
 use rbatis::rbdc::datetime::DateTime;
+use rbatis::{crud, html_sql, RBatis};
 use serde_json::json;
 
 #[derive(serde::Serialize, serde::Deserialize, Clone)]
@@ -18,30 +18,33 @@ pub struct User {
     pub create_time: Option<DateTime>,
 }
 
+#[html_sql("rbatis-example/example.html")]
+async fn select_by_condition2(rb: &dyn Executor, user: User) -> Vec<User> {
+    impled!()
+}
 
 #[html_sql(
-r#"<select id="select_by_condition">
+    r#"<select id="select_by_condition">
         `select * from t_user`
         <where>
              ` and tel = #{user.tel}`
         </where>
   </select>"#
 )]
-async fn select_by_condition(
-    rb: &dyn Executor,
-    user: User,
-) -> rbatis::Result<Vec<User>> {
+async fn select_by_condition(rb: &dyn Executor, user: User) -> rbatis::Result<Vec<User>> {
     impled!()
 }
 
-
-crud!(User {},"t_user"); // impl_insert!($table {}) + impl_select!($table {}) + impl_update!($table {}) + impl_delete!($table {});
-
+crud!(User {}, "t_user"); 
 
 #[tokio::main]
 pub async fn main() {
     let rb = RBatis::new();
-    rb.init(rbdc_mysql::driver::MysqlDriver {}, "mysql://root:root@192.168.101.90/t_gorm").unwrap();
+    rb.init(
+        rbdc_mysql::driver::MysqlDriver {},
+        "mysql://root:root@192.168.101.90/t_gorm",
+    )
+    .unwrap();
 
     let table = User {
         id: None,
@@ -50,11 +53,9 @@ pub async fn main() {
         money: Some(11),
         create_time: Some(DateTime::now()),
     };
-    let tables = [table.clone(), {
-        let mut k = table.clone();
-        k.tel = Some("3".into());
-        k
-    }];
+    let mut k = table.clone();
+    k.tel = Some("3".into());
+    let tables = [table.clone(), k.clone()];
 
     let data = User::insert(&rb, &table).await;
     println!("insert = {}", json!(data));
@@ -62,9 +63,10 @@ pub async fn main() {
     println!("insert_batch = {}", json!(data));
     let data = User::select_by_column(&rb, "name", 2).await;
     println!("select_in_column = {}", json!(data));
-    let data = select_by_condition(&rb,table).await;
+    let data = select_by_condition(&rb, table.clone()).await;
     println!("select_by_condition = {}", json!(data));
+    let data = select_by_condition2(&rb, k.clone()).await;
+    println!("select_by_condition2 = {}", json!(data));
     let data = User::delete_by_column(&rb, "name", 2).await;
     println!("delete_in_column = {}", json!(data));
 }
-
