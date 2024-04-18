@@ -23,7 +23,7 @@ pub struct User {
 r#"<select id="select_by_condition">
         `select * from t_user`
         <where>
-             ` and tel = #{user.tel}`
+             ` and tel = ,`
         </where>
   </select>"#
 )]
@@ -36,6 +36,7 @@ async fn select_by_condition(
 
 
 crud!(User {},"t_user"); // impl_insert!($table {}) + impl_select!($table {}) + impl_update!($table {}) + impl_delete!($table {});
+
 
 #[tokio::main]
 pub async fn main() {
