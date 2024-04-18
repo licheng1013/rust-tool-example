@@ -23,7 +23,7 @@ pub struct User {
 r#"<select id="select_by_condition">
         `select * from t_user`
         <where>
-             ` and tel = ,`
+             ` and tel = #{user.tel}`
         </where>
   </select>"#
 )]
