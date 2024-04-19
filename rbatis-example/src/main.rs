@@ -23,6 +23,12 @@ async fn select_by_condition2(rb: &dyn Executor, user: User) -> Vec<User> {
     impled!()
 }
 
+#[html_sql("rbatis-example/example.html")]
+async fn select_by_condition3(rb: &dyn Executor, name: &str) -> Vec<User> {
+    impled!()
+}
+
+
 #[html_sql(
     r#"<select id="select_by_condition">
         `select * from t_user`
@@ -67,6 +73,8 @@ pub async fn main() {
     println!("select_by_condition = {}", json!(data));
     let data = select_by_condition2(&rb, k.clone()).await;
     println!("select_by_condition2 = {}", json!(data));
+    let data = select_by_condition3(&rb, "3").await;
+    println!("select_by_condition3 = {}", json!(data));
     let data = User::delete_by_column(&rb, "name", 2).await;
     println!("delete_in_column = {}", json!(data));
 }
