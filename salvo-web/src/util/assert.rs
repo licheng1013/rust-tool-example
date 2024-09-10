@@ -11,14 +11,14 @@ impl As {
         if msg.clone() == None || msg.unwrap().len() == 0 {
             return Err(AppError::Service { error_info: err_msg.to_string() });
         }
-        return Ok(());
+        Ok(())
     }
     /// 空数字，0也算空
     pub fn empty_num(msg: Option<i64>, err_msg: &str) -> AppResult<()> {
         if msg.clone() == None || msg.unwrap() == 0 {
             return Err(AppError::Service { error_info: err_msg.to_string() });
         }
-        return Ok(());
+        Ok(())
     }
 
     /// 判断字符串是不是大范围内,不包含边界. 示例: 1,10, n < 1 或 n > 10 都会报错, 1-10个长度之间不会报错
@@ -26,7 +26,7 @@ impl As {
         if msg.clone() == None || msg.clone().unwrap().len() < min as usize || msg.unwrap().len() > max as usize {
             return Err(AppError::Service { error_info: err_msg.to_string() });
         }
-        return Ok(());
+        Ok(())
     }
 
     /// 判断是为为 none
@@ -34,12 +34,12 @@ impl As {
         if data == None {
             return Err(AppError::Service { error_info: err_msg.to_string() });
         }
-        return Ok(());
+        Ok(())
     }
 
     /// 直接抛出错误
     pub fn error(err_msg: &str) -> AppResult<()> {
-        return Err(AppError::Service { error_info: err_msg.to_string() });
+        Err(AppError::Service { error_info: err_msg.to_string() })
     }
 
     /// 判断是否为真
@@ -47,7 +47,7 @@ impl As {
         if b {
             return Err(AppError::Service { error_info: err_msg.to_string() });
         }
-        return Ok(());
+        Ok(())
     }
 }
 

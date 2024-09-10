@@ -9,25 +9,25 @@ use crate::util::result::JsonResult;
 async fn list(_req: &mut Request) -> AppResult<JsonResult<PageResult<Vec<UserInfoDto>>>> {
     let model: UserInfoDto = _req.parse_queries().unwrap();
     let page: PageParam = _req.parse_queries().unwrap();
-    return logic::user_info_logic::list(page, UserInfo::from(model)).await;
+    logic::user_info_logic::list(page, UserInfo::from(model)).await
 }
 
 #[handler]
 async fn update(_req: &mut Request) -> AppResult<JsonResult<()>> {
     let model: UserInfoDto = _req.parse_json().await.unwrap();
-    return logic::user_info_logic::update(UserInfo::from(model)).await;
+    logic::user_info_logic::update(UserInfo::from(model)).await
 }
 
 #[handler]
 async fn delete(_req: &mut Request) -> AppResult<JsonResult<()>> {
     let model: UserInfoDto = _req.parse_json().await.unwrap();
-    return logic::user_info_logic::delete(UserInfo::from(model)).await;
+    logic::user_info_logic::delete(UserInfo::from(model)).await
 }
 
 #[handler]
 async fn insert(_req: &mut Request) -> AppResult<JsonResult<()>> {
     let model: UserInfoDto = _req.parse_json().await.unwrap();
-    return logic::user_info_logic::insert(UserInfo::from(model)).await;
+    logic::user_info_logic::insert(UserInfo::from(model)).await
 }
 
 pub fn router() -> Router {

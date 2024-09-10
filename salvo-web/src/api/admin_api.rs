@@ -14,26 +14,26 @@ use crate::util::result::JsonResult;
 async fn list(_req: &mut Request) -> AppResult<JsonResult<PageResult<Vec<AdminDto>>>> {
     let model: AdminDto = _req.parse_queries().unwrap();
     let page: PageParam = _req.parse_queries().unwrap();
-    return logic::admin_logic::list(page, Admin::from(model)).await;
+    logic::admin_logic::list(page, Admin::from(model)).await
 }
 
 
 #[handler]
 async fn update(_req: &mut Request) -> AppResult<JsonResult<()>> {
     let model: AdminDto = _req.parse_json().await.unwrap();
-    return logic::admin_logic::update(Admin::from(model)).await;
+    logic::admin_logic::update(Admin::from(model)).await
 }
 
 #[handler]
 async fn delete(_req: &mut Request) -> AppResult<JsonResult<()>> {
     let model: AdminDto = _req.parse_json().await.unwrap();
-    return logic::admin_logic::delete(model).await;
+    logic::admin_logic::delete(model).await
 }
 
 #[handler]
 async fn insert(_req: &mut Request) -> AppResult<JsonResult<()>> {
     let model: AdminDto = _req.parse_json().await.unwrap();
-    return logic::admin_logic::insert(Admin::from(model)).await;
+    logic::admin_logic::insert(Admin::from(model)).await
 }
 
 
@@ -42,7 +42,7 @@ async fn insert(_req: &mut Request) -> AppResult<JsonResult<()>> {
 async fn login(_req: &mut Request) -> AppResult<JsonResult<Map<String, Value>>> {
     let model: AdminDto = _req.parse_json().await.unwrap();
     let map = logic::admin_logic::login(Admin::from(model)).await;
-    return map;
+    map
 }
 
 
@@ -50,7 +50,7 @@ async fn login(_req: &mut Request) -> AppResult<JsonResult<Map<String, Value>>> 
 async fn user_info(_req: &mut Request, depot: &mut Depot) -> AppResult<JsonResult<Map<String, Value>>> {
     let admin = get_ctx(depot);
     let map = logic::admin_logic::user_info(admin).await;
-    return map;
+    map
 }
 
 pub fn router() -> Router {

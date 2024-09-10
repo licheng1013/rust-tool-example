@@ -25,26 +25,26 @@ pub async fn list(page: PageParam, model: UserInfo) -> AppResult<JsonResult<Page
     for item in result.records {
         list.push(UserInfoDto::from(item));
     }
-    return Ok(ok_data(PageResult {
+    Ok(ok_data(PageResult {
         total: result.total,
         list,
-    }));
+    }))
 }
 
 pub async fn update(model: UserInfo) -> AppResult<JsonResult<()>> {
     UserInfo::update_by_column(&mut RB.clone(), &model, "id").await.unwrap();
-    return Ok(ok_msg("修改成功".to_string()));
+    Ok(ok_msg("修改成功".to_string()))
 }
 
 pub async fn delete(model: UserInfo) -> AppResult<JsonResult<()>> {
     UserInfo::delete_by_column(&mut RB.clone(), "id", model.id).await.unwrap();
-    return Ok(ok_msg("删除成功".to_string()));
+    Ok(ok_msg("删除成功".to_string()))
 }
 
 pub async fn insert(mut model: UserInfo) -> AppResult<JsonResult<()>> {
     model.create_time = Some(DateTime::now());
     UserInfo::insert(&mut RB.clone(), &model).await.unwrap();
-    return Ok(ok_msg("插入成功".to_string()));
+    Ok(ok_msg("插入成功".to_string()))
 }
 
 pub fn where_condition(model: UserInfo) -> String {
@@ -65,5 +65,5 @@ pub fn where_condition(model: UserInfo) -> String {
         return "".to_string();
     }
     where_str = where_str[3..where_str.len()].to_string();
-    return format!("where{}",where_str)
+    format!("where{}",where_str)
 }

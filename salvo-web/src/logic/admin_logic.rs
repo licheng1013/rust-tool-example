@@ -33,21 +33,21 @@ pub async fn list(page: PageParam, model: Admin) -> AppResult<JsonResult<PageRes
     for item in result.records {
         list.push(AdminDto::from(item));
     }
-    return Ok(ok_data(PageResult {
+    Ok(ok_data(PageResult {
         total: result.total,
         list,
-    }));
+    }))
 }
 
 pub async fn update(model: Admin) -> AppResult<JsonResult<()>> {
     Admin::update_by_column(&mut RB.clone(), &model, "id").await.unwrap();
-    return Ok(ok_msg("修改成功".to_string()));
+    Ok(ok_msg("修改成功".to_string()))
 }
 
 pub async fn delete(model: AdminDto) -> AppResult<JsonResult<()>> {
     As::error("演示模式")?;
     Admin::delete_by_column(&mut RB.clone(), "id", model.id).await.unwrap();
-    return Ok(ok_msg("删除成功".to_string()));
+    Ok(ok_msg("删除成功".to_string()))
 }
 
 pub async fn insert(mut model: Admin) -> AppResult<JsonResult<()>> {
@@ -58,7 +58,7 @@ pub async fn insert(mut model: Admin) -> AppResult<JsonResult<()>> {
     As::empty_str(model.clone().salt,"盐为空")?;
     let result = Admin::insert(&mut RB.clone(), &model).await.unwrap();
     println!("{result:?}");
-    return Ok(ok_msg("插入成功".to_string()));
+    Ok(ok_msg("插入成功".to_string()))
 }
 
 pub fn where_condition(model: Admin) -> String {
@@ -85,7 +85,7 @@ pub fn where_condition(model: Admin) -> String {
         return "".to_string();
     }
     where_str = where_str[3..where_str.len()].to_string();
-    return format!("where{}", where_str);
+    format!("where{}", where_str)
 }
 
 
@@ -102,12 +102,12 @@ pub async fn login(admin: Admin) -> AppResult<JsonResult<Map<String, Value>>> {
     // 构建一个map结构
     let mut map = serde_json::Map::new();
     map.insert("token".to_string(), JwtUtil::token(one.id.unwrap()).into());
-    return Ok(ok_data(map));
+    Ok(ok_data(map))
 }
 
 pub(crate) async fn get(user_id: i64) -> Option<Admin> {
     let data = Admin::select_by_id(&mut RB.clone(), user_id).await.unwrap();
-    return data;
+    data
 }
 
 
@@ -123,5 +123,5 @@ pub(crate) async fn user_info(admin: Admin) -> AppResult<JsonResult<Map<String, 
     map.insert("userName".to_string(), "管理员".into());
     map.insert("userId".to_string(), admin.id.unwrap().into());
     map.insert("roles".to_string(), vec![roles].into());
-    return Ok(ok_data(map));
+    Ok(ok_data(map))
 }

@@ -12,7 +12,7 @@ pub struct JsonResult<T>{
 
 impl <T:Serialize>JsonResult<T> {
     pub fn to_string(&self) -> String {
-        return serde_json::to_string(self).unwrap();
+        serde_json::to_string(self).unwrap()
     }
 }
 
@@ -24,7 +24,7 @@ pub fn ok_msg(msg: String) -> JsonResult<()> {
         msg,
         data: (),
     };
-    return r;
+    r
 }
 
 /// 正确结果返回
@@ -34,7 +34,7 @@ pub fn ok_data<T>(data: T) -> JsonResult<T> {
         msg: "".to_string(),
         data,
     };
-    return r;
+    r
 }
 
 pub fn fail(msg: String) -> JsonResult<()> {
@@ -43,7 +43,7 @@ pub fn fail(msg: String) -> JsonResult<()> {
         msg,
         data: (),
     };
-    return r;
+    r
 }
 
 #[async_trait]
