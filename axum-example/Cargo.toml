@@ -11,9 +11,3 @@ resolver = "2"
 common = {path = "../common"}
 axum = "0.7.3"
 tokio = { version = "1", features = ["full"] }
-hyper = "^1.1.0"
-
-# 序列化
-serde = { version = "1.0.180", features = ["derive"] } #序列化
-serde_json = "1"
-tracing-subscriber = "0.3.18"
