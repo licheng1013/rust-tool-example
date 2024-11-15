@@ -7,7 +7,7 @@ async fn upload(req: &mut Request, res: &mut Response) {
     let file = req.file("file").await;
     if let Some(file) = file {
         // 只能绝对路径
-        let dest = format!("D:\\my-study\\rust-study\\salvo-web\\{}", file.name().unwrap_or("file"));
+        let dest = format!("D:\\my-study\\rust-study\\salvo-example\\{}", file.name().unwrap_or("file"));
         if let Err(e) = std::fs::copy(&file.path(), Path::new(&dest)) {
             println!("文件错误 {e:?}");
             res.render(Json(fail("上传失败!".to_string())));

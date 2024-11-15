@@ -1,19 +1,15 @@
 [package]
-name = "axum-demo"
+name = "actix-example"
 version = "0.1.0"
 edition = "2021"
-resolver = "2"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 # 子模块依赖
 common = {path = "../common"}
-axum = "0.7.3"
-tokio = { version = "1", features = ["full"] }
-hyper = "^1.1.0"
 
+actix-web = "4.9.0" #web框架
 # 序列化
 serde = { version = "1.0.180", features = ["derive"] } #序列化
-serde_json = "1"
-tracing-subscriber = "0.3.18"
+

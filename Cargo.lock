@@ -20,6 +20,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "actix-example"
+version = "0.1.0"
+dependencies = [
+ "actix-web",
+ "common",
+ "serde",
+]
+
+[[package]]
 name = "actix-http"
 version = "3.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -171,19 +180,6 @@ dependencies = [
  "socket2",
  "time",
  "url",
-]
-
-[[package]]
-name = "actix-web-api"
-version = "0.1.0"
-dependencies = [
- "actix-web",
- "common",
- "rbatis",
- "rbdc-mysql",
- "rbs",
- "serde",
- "serde_json",
 ]
 
 [[package]]
@@ -385,7 +381,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "axum-demo"
+name = "axum-example"
 version = "0.1.0"
 dependencies = [
  "axum",
@@ -2154,7 +2150,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "salvo-web-api"
+name = "salvo-example"
 version = "0.1.0"
 dependencies = [
  "common",

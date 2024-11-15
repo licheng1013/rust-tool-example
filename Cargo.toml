@@ -2,12 +2,12 @@
 resolver = "2"
 
 members = [
-    "salvo-web",
-    "actix-web",
+    "salvo-example",
+    "actix-example",
+    "axum-example",
+    "rbatis-example",
     "common",
-    "axum-demo"
-, "rbatis-example"]
-
+]
 exclude = [
 
 ]

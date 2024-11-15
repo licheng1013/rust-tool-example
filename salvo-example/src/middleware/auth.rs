@@ -11,7 +11,7 @@ pub async fn plugin(_req: &mut Request, depot: &mut Depot, res: &mut Response, c
     let path = _req.uri().path();
     let method = _req.method().as_str();
     // 打印请求路径
-    println!("[RustTool] {} - \"{}\"", method, path);
+    println!("[Api] {} - \"{}\"", method, path);
 
     if APP_CONFIG.is_exclude(&path) {
         return;
